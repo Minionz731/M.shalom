@@ -8,6 +8,12 @@
     <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-storage-compat.js"></script>
+    
     <style>
         :root {
             --primary: #D4AF37;
@@ -127,6 +133,11 @@
 
         .logo span {
             color: var(--text-primary);
+        }
+
+        .logo-image {
+            height: 60px;
+            width: auto;
         }
 
         .nav-links {
@@ -386,6 +397,33 @@
             background: var(--primary-dark);
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Loading States */
+        .loading-spinner {
+            text-align: center;
+            padding: 50px;
+            color: var(--text-secondary);
+        }
+
+        .spinner {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            border: 3px solid var(--border);
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
         }
 
         /* Admin Panel */
@@ -870,20 +908,31 @@
             color: var(--danger);
         }
 
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .upload-progress {
+            margin-top: 15px;
+            background: var(--bg-dark);
+            border-radius: 8px;
+            padding: 10px;
         }
 
-        .animate-in {
-            animation: fadeInUp 0.6s ease-out;
+        .progress-bar {
+            height: 4px;
+            background: var(--border);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--primary);
+            transition: width 0.3s;
+        }
+
+        .progress-text {
+            margin-top: 5px;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            text-align: center;
         }
 
         /* Floating WhatsApp Button */
@@ -944,9 +993,39 @@
             opacity: 1;
         }
 
-        .logo-image {
-            height: 60px;
-            width: auto;
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-in {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        /* Firebase Config Warning */
+        .config-warning {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--danger);
+            color: white;
+            padding: 15px;
+            text-align: center;
+            z-index: 3000;
+            font-weight: 600;
+        }
+
+        .config-warning a {
+            color: white;
+            text-decoration: underline;
         }
 
         /* Responsive */
@@ -961,10 +1040,6 @@
 
             .admin-grid {
                 grid-template-columns: 1fr;
-            }
-
-            .nav-links {
-                display: none;
             }
 
             .filter-grid {
@@ -982,6 +1057,88 @@
                 width: 28px;
                 height: 28px;
             }
+
+            /* Mobile Navigation */
+            .header-top {
+                padding: 8px 0;
+            }
+
+            .header-top .container {
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .contact-info {
+                flex-direction: column;
+                gap: 5px;
+                width: 100%;
+            }
+
+            .contact-item {
+                font-size: 0.75rem;
+            }
+
+            .header-main {
+                padding: 12px 0;
+            }
+
+            .logo {
+                font-size: 1.8rem !important;
+            }
+
+            .logo-image {
+                height: 40px;
+            }
+
+            .nav-links {
+                gap: 12px;
+                flex-wrap: wrap;
+            }
+
+            .nav-link {
+                font-size: 0.85rem;
+                padding: 4px 0;
+            }
+
+            .header-content {
+                gap: 12px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1.5rem !important;
+                letter-spacing: 1px !important;
+            }
+
+            .logo-image {
+                height: 35px;
+            }
+
+            .nav-links {
+                gap: 8px;
+            }
+
+            .nav-link {
+                font-size: 0.75rem;
+            }
+
+            .contact-item {
+                font-size: 0.7rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .rating {
+                font-size: 0.85rem;
+                padding: 10px 20px;
+            }
         }
     </style>
 </head>
@@ -991,7 +1148,29 @@
     <script type="text/babel">
         const { useState, useEffect } = React;
 
-        // Sample initial data
+        // ===== FIREBASE CONFIGURATION =====
+        const firebaseConfig = {
+            apiKey: "AIzaSyAmTpHi_6bX916qm4KgyP8YP4qQWNHIYG4",
+            authDomain: "m-shalom-trading.firebaseapp.com",
+            databaseURL: "https://m-shalom-trading-default-rtdb.firebaseio.com",
+            projectId: "m-shalom-trading",
+            storageBucket: "m-shalom-trading.firebasestorage.app",
+            messagingSenderId: "5862123065",
+            appId: "1:5862123065:web:2e2e3caa68511b1a5ecfe8"
+        };
+
+        // Check if Firebase is configured
+        const isFirebaseConfigured = firebaseConfig.apiKey !== "YOUR_API_KEY_HERE";
+
+        // Initialize Firebase
+        let database, storage;
+        if (isFirebaseConfigured) {
+            firebase.initializeApp(firebaseConfig);
+            database = firebase.database();
+            storage = firebase.storage();
+        }
+
+        // Sample initial data (only used if Firebase not configured)
         const initialInventory = [
             {
                 id: 1,
@@ -1005,55 +1184,14 @@
                 quantity: 2,
                 images: ["https://images.unsplash.com/photo-1555215695-3004980ad54e?w=800&h=600&fit=crop"],
                 description: "Luxury sedan in excellent condition"
-            },
-            {
-                id: 2,
-                make: "Mercedes-Benz",
-                model: "C-Class",
-                year: 2020,
-                price: 520000,
-                mileage: 35000,
-                transmission: "Automatic",
-                fuelType: "Diesel",
-                quantity: 1,
-                images: ["https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?w=800&h=600&fit=crop"],
-                description: "Premium executive car"
-            },
-            {
-                id: 3,
-                make: "Toyota",
-                model: "Fortuner",
-                year: 2021,
-                price: 580000,
-                mileage: 28000,
-                transmission: "Automatic",
-                fuelType: "Diesel",
-                quantity: 3,
-                images: ["https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?w=800&h=600&fit=crop"],
-                description: "Rugged SUV perfect for families"
-            },
-            {
-                id: 4,
-                make: "Volkswagen",
-                model: "Polo GTI",
-                year: 2018,
-                price: 280000,
-                mileage: 52000,
-                transmission: "Manual",
-                fuelType: "Petrol",
-                quantity: 0,
-                images: ["https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=800&h=600&fit=crop"],
-                description: "Sporty hatchback with excellent performance"
             }
         ];
 
         function App() {
             const [currentView, setCurrentView] = useState('home');
             const [isAdmin, setIsAdmin] = useState(false);
-            const [inventory, setInventory] = useState(() => {
-                const saved = localStorage.getItem('mshalom_inventory');
-                return saved ? JSON.parse(saved) : initialInventory;
-            });
+            const [inventory, setInventory] = useState([]);
+            const [loading, setLoading] = useState(true);
             const [filters, setFilters] = useState({
                 search: '',
                 minPrice: '',
@@ -1063,9 +1201,32 @@
             });
             const [selectedCar, setSelectedCar] = useState(null);
 
+            // Load inventory from Firebase
             useEffect(() => {
-                localStorage.setItem('mshalom_inventory', JSON.stringify(inventory));
-            }, [inventory]);
+                if (!isFirebaseConfigured) {
+                    setInventory(initialInventory);
+                    setLoading(false);
+                    return;
+                }
+
+                const inventoryRef = database.ref('inventory');
+                
+                inventoryRef.on('value', (snapshot) => {
+                    const data = snapshot.val();
+                    if (data) {
+                        const inventoryArray = Object.keys(data).map(key => ({
+                            id: key,
+                            ...data[key]
+                        }));
+                        setInventory(inventoryArray);
+                    } else {
+                        setInventory([]);
+                    }
+                    setLoading(false);
+                });
+
+                return () => inventoryRef.off();
+            }, []);
 
             const filteredInventory = inventory.filter(car => {
                 if (car.quantity === 0) return false;
@@ -1081,16 +1242,31 @@
                 return matchesSearch && matchesMinPrice && matchesMaxPrice && matchesTransmission && matchesFuelType;
             });
 
+            if (!isFirebaseConfigured) {
+                return <ConfigWarning />;
+            }
+
             if (currentView === 'admin-login') {
                 return <AdminLogin onLogin={() => { setIsAdmin(true); setCurrentView('admin'); }} />;
             }
 
             if (currentView === 'admin' && isAdmin) {
                 return <AdminPanel 
-                    inventory={inventory} 
-                    setInventory={setInventory}
+                    inventory={inventory}
                     onLogout={() => { setIsAdmin(false); setCurrentView('home'); }}
                 />;
+            }
+
+            if (loading) {
+                return (
+                    <>
+                        <Header onAdminClick={() => setCurrentView('admin-login')} />
+                        <div className="loading-spinner">
+                            <div className="spinner"></div>
+                            <p style={{marginTop: '20px'}}>Loading inventory...</p>
+                        </div>
+                    </>
+                );
             }
 
             return (
@@ -1110,10 +1286,56 @@
             );
         }
 
+        function ConfigWarning() {
+            return (
+                <div style={{
+                    minHeight: '100vh',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    padding: '20px'
+                }}>
+                    <div style={{
+                        background: 'var(--bg-card)',
+                        padding: '40px',
+                        borderRadius: '12px',
+                        maxWidth: '600px',
+                        border: '2px solid var(--danger)'
+                    }}>
+                        <h2 style={{color: 'var(--danger)', marginBottom: '20px', fontFamily: 'Bebas Neue', fontSize: '2rem'}}>
+                            ⚠️ FIREBASE NOT CONFIGURED
+                        </h2>
+                        <p style={{marginBottom: '15px', lineHeight: '1.8'}}>
+                            This website requires Firebase to store inventory data across all devices.
+                        </p>
+                        <p style={{marginBottom: '15px', lineHeight: '1.8'}}>
+                            Please follow the <strong>FIREBASE-SETUP-GUIDE.md</strong> to:
+                        </p>
+                        <ol style={{marginLeft: '20px', lineHeight: '2'}}>
+                            <li>Create a free Firebase account</li>
+                            <li>Set up a new Firebase project</li>
+                            <li>Get your configuration values</li>
+                            <li>Replace the config in this HTML file</li>
+                        </ol>
+                        <div style={{
+                            marginTop: '20px',
+                            padding: '15px',
+                            background: 'var(--bg-dark)',
+                            borderRadius: '8px',
+                            fontSize: '0.9rem',
+                            color: 'var(--text-secondary)'
+                        }}>
+                            Look for <code style={{color: 'var(--primary)'}}>firebaseConfig</code> in the HTML file and update it with your values.
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
         function Header({ onAdminClick }) {
             return (
                 <header>
-                    <header className="header-top">
+                    <div className="header-top">
                         <div className="container">
                             <div className="contact-info">
                                 <div className="contact-item">
@@ -1128,15 +1350,13 @@
                                     <span>⏰</span>
                                     <span>Mon-Fri: 8am-5pm | Sat: 8am-3pm</span>
                                 </div>
-                                </div>
-                                </div>
-                                </header>
-
+                            </div>
+                        </div>
+                    </div>
                     <div className="header-main">
                         <div className="container">
                             <div className="header-content">
                                 <div className="logo">
-                                    {/* Replace 'logo-placeholder.png' with your actual logo path */}
                                     <img src="m.shalom.png" alt="M Shalom Trading" className="logo-image" 
                                          onError={(e) => {
                                              e.target.style.display = 'none';
@@ -1284,7 +1504,7 @@
 
             return (
                 <div className="car-card animate-in" onClick={() => onCarClick(car)}>
-                    <img src={car.images && car.images[0] ? car.images[0] : car.image} alt={`${car.make} ${car.model}`} className="car-image" />
+                    <img src={car.images && car.images[0] ? car.images[0] : ''} alt={`${car.make} ${car.model}`} className="car-image" />
                     <div className="car-content">
                         <div className="car-header">
                             <h3 className="car-title">{car.year} {car.make} {car.model}</h3>
@@ -1327,7 +1547,7 @@
 
         function CarModal({ car, onClose }) {
             const [currentImageIndex, setCurrentImageIndex] = useState(0);
-            const images = car.images && car.images.length > 0 ? car.images : [car.image];
+            const images = car.images && car.images.length > 0 ? car.images : [];
 
             useEffect(() => {
                 const handleEscape = (e) => {
@@ -1375,28 +1595,32 @@
                         </div>
 
                         <div className="slideshow-container">
-                            <img 
-                                src={images[currentImageIndex]} 
-                                alt={`${car.make} ${car.model} - Image ${currentImageIndex + 1}`}
-                                className="slideshow-image"
-                            />
-                            {images.length > 1 && (
-                                <div className="slideshow-controls">
-                                    <button 
-                                        className="slideshow-btn" 
-                                        onClick={handlePrevious}
-                                        disabled={images.length <= 1}
-                                    >
-                                        ‹
-                                    </button>
-                                    <button 
-                                        className="slideshow-btn" 
-                                        onClick={handleNext}
-                                        disabled={images.length <= 1}
-                                    >
-                                        ›
-                                    </button>
-                                </div>
+                            {images.length > 0 ? (
+                                <>
+                                    <img 
+                                        src={images[currentImageIndex]} 
+                                        alt={`${car.make} ${car.model} - Image ${currentImageIndex + 1}`}
+                                        className="slideshow-image"
+                                    />
+                                    {images.length > 1 && (
+                                        <div className="slideshow-controls">
+                                            <button 
+                                                className="slideshow-btn" 
+                                                onClick={handlePrevious}
+                                            >
+                                                ‹
+                                            </button>
+                                            <button 
+                                                className="slideshow-btn" 
+                                                onClick={handleNext}
+                                            >
+                                                ›
+                                            </button>
+                                        </div>
+                                    )}
+                                </>
+                            ) : (
+                                <div style={{color: 'var(--text-secondary)'}}>No images available</div>
                             )}
                         </div>
 
@@ -1476,7 +1700,7 @@
 
         function WhatsAppFloat() {
             const openWhatsApp = () => {
-                const phone = "27646430253"; // 064 643 0253 in international format
+                const phone = "27646430253";
                 const message = encodeURIComponent(
                     "Hi M Shalom Trading! I'm interested in your vehicles. Can you help me?"
                 );
@@ -1501,7 +1725,6 @@
 
             const handleLogin = (e) => {
                 e.preventDefault();
-                // Simple authentication - in production, use proper backend authentication
                 if (username === 'admin' && password === 'mshalom2024') {
                     onLogin();
                 } else {
@@ -1544,7 +1767,7 @@
             );
         }
 
-        function AdminPanel({ inventory, setInventory, onLogout }) {
+        function AdminPanel({ inventory, onLogout }) {
             const [formData, setFormData] = useState({
                 make: '',
                 model: '',
@@ -1559,6 +1782,8 @@
             });
             const [editingId, setEditingId] = useState(null);
             const [isDragging, setIsDragging] = useState(false);
+            const [uploadProgress, setUploadProgress] = useState(0);
+            const [uploading, setUploading] = useState(false);
 
             const handleFileSelect = (e) => {
                 const files = Array.from(e.target.files);
@@ -1582,7 +1807,7 @@
                 processFiles(files);
             };
 
-            const processFiles = (files) => {
+            const processFiles = async (files) => {
                 const imageFiles = files.filter(file => file.type.startsWith('image/'));
                 const remainingSlots = 6 - formData.images.length;
                 
@@ -1592,32 +1817,72 @@
                 }
 
                 const filesToProcess = imageFiles.slice(0, remainingSlots);
+                setUploading(true);
                 
-                filesToProcess.forEach(file => {
+                for (let i = 0; i < filesToProcess.length; i++) {
+                    const file = filesToProcess[i];
+                    
                     if (file.size > 5 * 1024 * 1024) {
                         alert(`${file.name} is too large. Maximum 5MB per image.`);
-                        return;
+                        continue;
                     }
 
-                    const reader = new FileReader();
-                    reader.onload = (e) => {
-                        setFormData(prev => ({
-                            ...prev,
-                            images: [...prev.images, e.target.result]
-                        }));
-                    };
-                    reader.readAsDataURL(file);
-                });
+                    try {
+                        // Upload to Firebase Storage
+                        const timestamp = Date.now();
+                        const fileName = `${timestamp}_${file.name}`;
+                        const storageRef = storage.ref(`vehicles/${fileName}`);
+                        
+                        const uploadTask = storageRef.put(file);
+                        
+                        await new Promise((resolve, reject) => {
+                            uploadTask.on('state_changed',
+                                (snapshot) => {
+                                    const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                                    setUploadProgress(progress);
+                                },
+                                (error) => {
+                                    console.error('Upload error:', error);
+                                    reject(error);
+                                },
+                                async () => {
+                                    const downloadURL = await uploadTask.snapshot.ref.getDownloadURL();
+                                    setFormData(prev => ({
+                                        ...prev,
+                                        images: [...prev.images, downloadURL]
+                                    }));
+                                    resolve();
+                                }
+                            );
+                        });
+                    } catch (error) {
+                        console.error('Error uploading image:', error);
+                        alert(`Failed to upload ${file.name}`);
+                    }
+                }
+                
+                setUploading(false);
+                setUploadProgress(0);
             };
 
-            const removeImage = (index) => {
+            const removeImage = async (index, imageUrl) => {
+                try {
+                    // Delete from Firebase Storage
+                    if (imageUrl.includes('firebasestorage')) {
+                        const imageRef = storage.refFromURL(imageUrl);
+                        await imageRef.delete();
+                    }
+                } catch (error) {
+                    console.error('Error deleting image:', error);
+                }
+                
                 setFormData(prev => ({
                     ...prev,
                     images: prev.images.filter((_, i) => i !== index)
                 }));
             };
 
-            const handleSubmit = (e) => {
+            const handleSubmit = async (e) => {
                 e.preventDefault();
                 
                 if (formData.images.length === 0) {
@@ -1625,53 +1890,94 @@
                     return;
                 }
                 
-                if (editingId) {
-                    setInventory(inventory.map(car => 
-                        car.id === editingId ? { ...formData, id: editingId } : car
-                    ));
-                    setEditingId(null);
-                } else {
-                    const newCar = {
-                        ...formData,
-                        id: Date.now(),
-                        price: parseFloat(formData.price),
-                        mileage: parseInt(formData.mileage),
-                        year: parseInt(formData.year),
-                        quantity: parseInt(formData.quantity)
-                    };
-                    setInventory([...inventory, newCar]);
-                }
+                const carData = {
+                    ...formData,
+                    price: parseFloat(formData.price),
+                    mileage: parseInt(formData.mileage),
+                    year: parseInt(formData.year),
+                    quantity: parseInt(formData.quantity),
+                    createdAt: Date.now()
+                };
 
-                // Reset form
-                setFormData({
-                    make: '',
-                    model: '',
-                    year: new Date().getFullYear(),
-                    price: '',
-                    mileage: '',
-                    transmission: 'Automatic',
-                    fuelType: 'Petrol',
-                    quantity: 1,
-                    images: [],
-                    description: ''
-                });
+                try {
+                    if (editingId) {
+                        // Update existing
+                        await database.ref(`inventory/${editingId}`).update(carData);
+                        setEditingId(null);
+                    } else {
+                        // Add new
+                        await database.ref('inventory').push(carData);
+                    }
+
+                    // Reset form
+                    setFormData({
+                        make: '',
+                        model: '',
+                        year: new Date().getFullYear(),
+                        price: '',
+                        mileage: '',
+                        transmission: 'Automatic',
+                        fuelType: 'Petrol',
+                        quantity: 1,
+                        images: [],
+                        description: ''
+                    });
+
+                    alert('Vehicle saved successfully!');
+                } catch (error) {
+                    console.error('Error saving vehicle:', error);
+                    alert('Failed to save vehicle. Please try again.');
+                }
             };
 
             const handleEdit = (car) => {
-                setFormData(car);
+                setFormData({
+                    make: car.make,
+                    model: car.model,
+                    year: car.year,
+                    price: car.price,
+                    mileage: car.mileage,
+                    transmission: car.transmission,
+                    fuelType: car.fuelType,
+                    quantity: car.quantity,
+                    images: car.images || [],
+                    description: car.description
+                });
                 setEditingId(car.id);
             };
 
-            const handleDelete = (id) => {
-                if (confirm('Are you sure you want to delete this vehicle?')) {
-                    setInventory(inventory.filter(car => car.id !== id));
+            const handleDelete = async (id, images) => {
+                if (!confirm('Are you sure you want to delete this vehicle?')) return;
+                
+                try {
+                    // Delete images from storage
+                    if (images && images.length > 0) {
+                        for (const imageUrl of images) {
+                            if (imageUrl.includes('firebasestorage')) {
+                                const imageRef = storage.refFromURL(imageUrl);
+                                await imageRef.delete();
+                            }
+                        }
+                    }
+                    
+                    // Delete from database
+                    await database.ref(`inventory/${id}`).remove();
+                    alert('Vehicle deleted successfully!');
+                } catch (error) {
+                    console.error('Error deleting vehicle:', error);
+                    alert('Failed to delete vehicle. Please try again.');
                 }
             };
 
-            const adjustQuantity = (id, change) => {
-                setInventory(inventory.map(car => 
-                    car.id === id ? { ...car, quantity: Math.max(0, car.quantity + change) } : car
-                ));
+            const adjustQuantity = async (id, change) => {
+                const car = inventory.find(c => c.id === id);
+                const newQuantity = Math.max(0, car.quantity + change);
+                
+                try {
+                    await database.ref(`inventory/${id}`).update({ quantity: newQuantity });
+                } catch (error) {
+                    console.error('Error updating quantity:', error);
+                }
             };
 
             return (
@@ -1779,14 +2085,14 @@
                                         <label>Vehicle Images (Max 6)</label>
                                         <div 
                                             className={`image-upload-area ${isDragging ? 'drag-over' : ''}`}
-                                            onClick={() => document.getElementById('imageInput').click()}
+                                            onClick={() => !uploading && document.getElementById('imageInput').click()}
                                             onDragOver={handleDragOver}
                                             onDragLeave={handleDragLeave}
                                             onDrop={handleDrop}
                                         >
                                             <div className="upload-icon">📸</div>
                                             <p style={{color: 'var(--text-secondary)', marginBottom: '5px'}}>
-                                                Click to upload or drag & drop
+                                                {uploading ? 'Uploading...' : 'Click to upload or drag & drop'}
                                             </p>
                                             <p style={{color: 'var(--text-secondary)', fontSize: '0.85rem'}}>
                                                 JPG, PNG, GIF (max 5MB each)
@@ -1798,8 +2104,17 @@
                                                 multiple
                                                 style={{display: 'none'}}
                                                 onChange={handleFileSelect}
+                                                disabled={uploading}
                                             />
                                         </div>
+                                        {uploading && (
+                                            <div className="upload-progress">
+                                                <div className="progress-bar">
+                                                    <div className="progress-fill" style={{width: `${uploadProgress}%`}}></div>
+                                                </div>
+                                                <p className="progress-text">Uploading... {Math.round(uploadProgress)}%</p>
+                                            </div>
+                                        )}
                                         {formData.images.length > 0 && (
                                             <>
                                                 <div className="preview-grid">
@@ -1811,7 +2126,7 @@
                                                                 className="preview-remove"
                                                                 onClick={(e) => {
                                                                     e.stopPropagation();
-                                                                    removeImage(index);
+                                                                    removeImage(index, img);
                                                                 }}
                                                             >
                                                                 ×
@@ -1835,7 +2150,7 @@
                                             required
                                         />
                                     </div>
-                                    <button type="submit" className="btn btn-primary" disabled={formData.images.length === 0}>
+                                    <button type="submit" className="btn btn-primary" disabled={formData.images.length === 0 || uploading}>
                                         {editingId ? 'Update Vehicle' : 'Add Vehicle'}
                                         {formData.images.length === 0 && ' (Add at least 1 image)'}
                                     </button>
@@ -1888,7 +2203,7 @@
                                                         </small>
                                                         <br/>
                                                         <small style={{color: 'var(--primary)'}}>
-                                                            📸 {car.images ? car.images.length : (car.image ? 1 : 0)} image(s)
+                                                            📸 {car.images ? car.images.length : 0} image(s)
                                                         </small>
                                                     </div>
                                                 </td>
@@ -1921,7 +2236,7 @@
                                                         </button>
                                                         <button 
                                                             className="btn btn-small btn-danger"
-                                                            onClick={() => handleDelete(car.id)}
+                                                            onClick={() => handleDelete(car.id, car.images)}
                                                         >
                                                             Delete
                                                         </button>
@@ -1968,7 +2283,7 @@
                             </div>
                         </div>
                         <div className="footer-bottom">
-                            <p>&copy; 2024 M Shalom Trading. All rights reserved. | Designed with passion for automotive excellence</p>
+                            <p>&copy; 2024 M Shalom Trading. All rights reserved. | Powered by Firebase</p>
                         </div>
                     </div>
                 </footer>
