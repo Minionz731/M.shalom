@@ -1,0 +1,1991 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>M Shalom Trading - Premium Used Cars Randburg</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        :root {
+            --primary: #D4AF37;
+            --primary-dark: #B8941F;
+            --bg-dark: #0A0A0A;
+            --bg-card: #1A1A1A;
+            --bg-hover: #252525;
+            --text-primary: #FFFFFF;
+            --text-secondary: #B0B0B0;
+            --border: #2A2A2A;
+            --success: #10B981;
+            --danger: #EF4444;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(180deg, rgba(26, 26, 26, 0.98) 0%, rgba(10, 10, 10, 0.95) 100%);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .header-top {
+            background: var(--bg-card);
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .header-top .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .contact-info {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-link {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--bg-hover);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 1px solid var(--border);
+        }
+
+        .social-link:hover {
+            background: var(--primary);
+            color: var(--bg-dark);
+            transform: translateY(-2px);
+            border-color: var(--primary);
+        }
+
+        .header-main {
+            padding: 20px 0;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .logo {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2.5rem;
+            letter-spacing: 3px;
+            color: var(--primary);
+            text-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+        }
+
+        .logo span {
+            color: var(--text-primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--primary);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #1A1A1A 0%, #0A0A0A 100%);
+            padding: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse"><path d="M 100 0 L 0 0 0 100" fill="none" stroke="rgba(212,175,55,0.05)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 4rem;
+            letter-spacing: 4px;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--primary) 0%, #FFD700 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+            max-width: 800px;
+            margin: 0 auto 30px;
+        }
+
+        .rating {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--bg-card);
+            padding: 15px 30px;
+            border-radius: 50px;
+            border: 1px solid var(--border);
+        }
+
+        .stars {
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+
+        /* Filters */
+        .filters {
+            background: var(--bg-card);
+            padding: 30px;
+            border-radius: 12px;
+            margin: -50px auto 50px;
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            border: 1px solid var(--border);
+        }
+
+        .filter-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .filter-group label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .filter-input,
+        .filter-select {
+            padding: 12px 15px;
+            background: var(--bg-dark);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-family: 'Outfit', sans-serif;
+            transition: all 0.3s;
+        }
+
+        .filter-input:focus,
+        .filter-select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+        }
+
+        /* Car Grid */
+        .inventory-section {
+            padding: 50px 0;
+        }
+
+        .section-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 3rem;
+            letter-spacing: 3px;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .car-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .car-card {
+            background: var(--bg-card);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .car-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2);
+        }
+
+        .car-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            background: var(--bg-dark);
+        }
+
+        .car-content {
+            padding: 20px;
+        }
+
+        .car-header {
+            margin-bottom: 15px;
+        }
+
+        .car-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .car-price {
+            font-size: 1.8rem;
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .car-specs {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .spec-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .stock-badge {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .in-stock {
+            background: rgba(16, 185, 129, 0.2);
+            color: var(--success);
+            border: 1px solid var(--success);
+        }
+
+        .out-of-stock {
+            background: rgba(239, 68, 68, 0.2);
+            color: var(--danger);
+            border: 1px solid var(--danger);
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: var(--bg-dark);
+            width: 100%;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+        }
+
+        /* Admin Panel */
+        .admin-panel {
+            min-height: 100vh;
+            padding: 50px 0;
+        }
+
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+
+        .btn-logout {
+            background: var(--danger);
+            color: white;
+        }
+
+        .btn-logout:hover {
+            background: #DC2626;
+        }
+
+        .admin-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .admin-form {
+            background: var(--bg-card);
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .form-input,
+        .form-textarea {
+            width: 100%;
+            padding: 12px 15px;
+            background: var(--bg-dark);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .form-textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .form-input:focus,
+        .form-textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .admin-table {
+            width: 100%;
+            background: var(--bg-card);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        thead {
+            background: var(--bg-dark);
+        }
+
+        th {
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            border-bottom: 1px solid var(--border);
+        }
+
+        td {
+            padding: 15px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        tbody tr:hover {
+            background: var(--bg-hover);
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-small {
+            padding: 6px 12px;
+            font-size: 0.85rem;
+        }
+
+        .btn-success {
+            background: var(--success);
+            color: white;
+        }
+
+        .btn-danger {
+            background: var(--danger);
+            color: white;
+        }
+
+        /* Login Form */
+        .login-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .login-box {
+            background: var(--bg-card);
+            padding: 50px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            max-width: 450px;
+            width: 100%;
+        }
+
+        .login-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2.5rem;
+            letter-spacing: 2px;
+            text-align: center;
+            margin-bottom: 30px;
+            color: var(--primary);
+        }
+
+        .error-message {
+            background: rgba(239, 68, 68, 0.2);
+            color: var(--danger);
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+            border: 1px solid var(--danger);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-card);
+            padding: 50px 0 20px;
+            border-top: 1px solid var(--border);
+            margin-top: 100px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 30px;
+        }
+
+        .footer-section h3 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.5rem;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .footer-section a:hover {
+            color: var(--primary);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid var(--border);
+            color: var(--text-secondary);
+        }
+
+        /* Modal and Slideshow Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            position: relative;
+            width: 90%;
+            max-width: 1200px;
+            max-height: 90vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background: var(--bg-card);
+            border-radius: 12px 12px 0 0;
+        }
+
+        .modal-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2rem;
+            letter-spacing: 2px;
+            color: var(--primary);
+        }
+
+        .modal-close {
+            background: transparent;
+            border: none;
+            color: var(--text-primary);
+            font-size: 2rem;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.3s;
+        }
+
+        .modal-close:hover {
+            background: var(--bg-hover);
+            transform: rotate(90deg);
+        }
+
+        .slideshow-container {
+            position: relative;
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--bg-dark);
+            padding: 20px;
+        }
+
+        .slideshow-image {
+            max-width: 100%;
+            max-height: 60vh;
+            object-fit: contain;
+            border-radius: 8px;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .slideshow-controls {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+            pointer-events: none;
+        }
+
+        .slideshow-btn {
+            pointer-events: all;
+            background: rgba(26, 26, 26, 0.9);
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.5rem;
+            transition: all 0.3s;
+        }
+
+        .slideshow-btn:hover {
+            background: var(--primary);
+            color: var(--bg-dark);
+            transform: scale(1.1);
+        }
+
+        .slideshow-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        .slideshow-info {
+            background: var(--bg-card);
+            padding: 20px;
+            border-radius: 0 0 12px 12px;
+        }
+
+        .slideshow-counter {
+            text-align: center;
+            color: var(--text-secondary);
+            margin-bottom: 15px;
+        }
+
+        .thumbnail-strip {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            padding: 10px 0;
+        }
+
+        .thumbnail {
+            width: 80px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 6px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.3s;
+            flex-shrink: 0;
+        }
+
+        .thumbnail:hover {
+            border-color: var(--primary);
+            transform: scale(1.05);
+        }
+
+        .thumbnail.active {
+            border-color: var(--primary);
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+        }
+
+        .car-details-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid var(--border);
+        }
+
+        .detail-item {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .detail-label {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+
+        .detail-value {
+            color: var(--text-primary);
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .image-upload-area {
+            border: 2px dashed var(--border);
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: var(--bg-dark);
+        }
+
+        .image-upload-area:hover {
+            border-color: var(--primary);
+            background: var(--bg-hover);
+        }
+
+        .image-upload-area.drag-over {
+            border-color: var(--primary);
+            background: var(--bg-hover);
+        }
+
+        .upload-icon {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            opacity: 0.5;
+        }
+
+        .preview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .preview-item {
+            position: relative;
+            width: 100%;
+            padding-bottom: 75%;
+            border-radius: 6px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        .preview-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .preview-remove {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: var(--danger);
+            color: white;
+            border: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            transition: all 0.3s;
+        }
+
+        .preview-remove:hover {
+            transform: scale(1.1);
+            background: #DC2626;
+        }
+
+        .image-count {
+            margin-top: 10px;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .image-count.limit-reached {
+            color: var(--danger);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-in {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        /* Floating WhatsApp Button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: #25D366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
+            cursor: pointer;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6);
+        }
+
+        .whatsapp-float svg {
+            width: 35px;
+            height: 35px;
+            fill: white;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
+            }
+            50% {
+                box-shadow: 0 4px 20px rgba(37, 211, 102, 0.7);
+            }
+        }
+
+        .whatsapp-tooltip {
+            position: absolute;
+            right: 70px;
+            background: white;
+            color: #333;
+            padding: 8px 15px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            white-space: nowrap;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+
+        .whatsapp-float:hover .whatsapp-tooltip {
+            opacity: 1;
+        }
+
+        .logo-image {
+            height: 60px;
+            width: auto;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .car-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .admin-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .filter-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .whatsapp-float {
+                bottom: 20px;
+                right: 20px;
+                width: 50px;
+                height: 50px;
+            }
+
+            .whatsapp-float svg {
+                width: 28px;
+                height: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        // Sample initial data
+        const initialInventory = [
+            {
+                id: 1,
+                make: "BMW",
+                model: "3 Series",
+                year: 2019,
+                price: 450000,
+                mileage: 45000,
+                transmission: "Automatic",
+                fuelType: "Petrol",
+                quantity: 2,
+                images: ["https://images.unsplash.com/photo-1555215695-3004980ad54e?w=800&h=600&fit=crop"],
+                description: "Luxury sedan in excellent condition"
+            },
+            {
+                id: 2,
+                make: "Mercedes-Benz",
+                model: "C-Class",
+                year: 2020,
+                price: 520000,
+                mileage: 35000,
+                transmission: "Automatic",
+                fuelType: "Diesel",
+                quantity: 1,
+                images: ["https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?w=800&h=600&fit=crop"],
+                description: "Premium executive car"
+            },
+            {
+                id: 3,
+                make: "Toyota",
+                model: "Fortuner",
+                year: 2021,
+                price: 580000,
+                mileage: 28000,
+                transmission: "Automatic",
+                fuelType: "Diesel",
+                quantity: 3,
+                images: ["https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?w=800&h=600&fit=crop"],
+                description: "Rugged SUV perfect for families"
+            },
+            {
+                id: 4,
+                make: "Volkswagen",
+                model: "Polo GTI",
+                year: 2018,
+                price: 280000,
+                mileage: 52000,
+                transmission: "Manual",
+                fuelType: "Petrol",
+                quantity: 0,
+                images: ["https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=800&h=600&fit=crop"],
+                description: "Sporty hatchback with excellent performance"
+            }
+        ];
+
+        function App() {
+            const [currentView, setCurrentView] = useState('home');
+            const [isAdmin, setIsAdmin] = useState(false);
+            const [inventory, setInventory] = useState(() => {
+                const saved = localStorage.getItem('mshalom_inventory');
+                return saved ? JSON.parse(saved) : initialInventory;
+            });
+            const [filters, setFilters] = useState({
+                search: '',
+                minPrice: '',
+                maxPrice: '',
+                transmission: '',
+                fuelType: ''
+            });
+            const [selectedCar, setSelectedCar] = useState(null);
+
+            useEffect(() => {
+                localStorage.setItem('mshalom_inventory', JSON.stringify(inventory));
+            }, [inventory]);
+
+            const filteredInventory = inventory.filter(car => {
+                if (car.quantity === 0) return false;
+                
+                const matchesSearch = !filters.search || 
+                    `${car.make} ${car.model}`.toLowerCase().includes(filters.search.toLowerCase());
+                
+                const matchesMinPrice = !filters.minPrice || car.price >= parseInt(filters.minPrice);
+                const matchesMaxPrice = !filters.maxPrice || car.price <= parseInt(filters.maxPrice);
+                const matchesTransmission = !filters.transmission || car.transmission === filters.transmission;
+                const matchesFuelType = !filters.fuelType || car.fuelType === filters.fuelType;
+
+                return matchesSearch && matchesMinPrice && matchesMaxPrice && matchesTransmission && matchesFuelType;
+            });
+
+            if (currentView === 'admin-login') {
+                return <AdminLogin onLogin={() => { setIsAdmin(true); setCurrentView('admin'); }} />;
+            }
+
+            if (currentView === 'admin' && isAdmin) {
+                return <AdminPanel 
+                    inventory={inventory} 
+                    setInventory={setInventory}
+                    onLogout={() => { setIsAdmin(false); setCurrentView('home'); }}
+                />;
+            }
+
+            return (
+                <>
+                    <Header onAdminClick={() => setCurrentView('admin-login')} />
+                    <Hero />
+                    <div className="container">
+                        <Filters filters={filters} setFilters={setFilters} />
+                    </div>
+                    <InventorySection cars={filteredInventory} onCarClick={setSelectedCar} />
+                    <Footer />
+                    <WhatsAppFloat />
+                    {selectedCar && (
+                        <CarModal car={selectedCar} onClose={() => setSelectedCar(null)} />
+                    )}
+                </>
+            );
+        }
+
+        function Header({ onAdminClick }) {
+            return (
+                <header>
+                    <div className="header-top">
+                        <div className="container">
+                            <div className="contact-info">
+                                <div className="contact-item">
+                                    <span>📞</span>
+                                    <span>064 643 0253</span>
+                                </div>
+                                <div className="contact-item">
+                                    <span>📍</span>
+                                    <span>407 Eton Ave, Ferndale, Randburg</span>
+                                </div>
+                                <div className="contact-item">
+                                    <span>⏰</span>
+                                    <span>Mon-Fri: 8am-5pm | Sat: 8am-3pm</span>
+                                </div>
+                            </div>
+                            <div className="social-links">
+                                <a href="https://www.tiktok.com" target="_blank" className="social-link" title="TikTok">
+                                    <span>📱</span>
+                                </a>
+                                <a href="https://www.facebook.com" target="_blank" className="social-link" title="Facebook">
+                                    <span>👥</span>
+                                </a>
+                                <a href="https://www.instagram.com" target="_blank" className="social-link" title="Instagram">
+                                    <span>📸</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="header-main">
+                        <div className="container">
+                            <div className="header-content">
+                                <div className="logo">
+                                    {/* Replace 'logo-placeholder.png' with your actual logo path */}
+                                    <img src="m.shalom.png" alt="M Shalom Trading" className="logo-image" 
+                                         onError={(e) => {
+                                             e.target.style.display = 'none';
+                                             e.target.nextElementSibling.style.display = 'block';
+                                         }}
+                                    />
+                                    <div style={{display: 'none', fontFamily: 'Bebas Neue', fontSize: '2.5rem', letterSpacing: '3px'}}>
+                                        M SHALOM <span style={{color: 'var(--text-primary)'}}>TRADING</span>
+                                    </div>
+                                </div>
+                                <nav>
+                                    <ul className="nav-links">
+                                        <li><a href="#" className="nav-link">Home</a></li>
+                                        <li><a href="#inventory" className="nav-link">Inventory</a></li>
+                                        <li><a href="#contact" className="nav-link">Contact</a></li>
+                                        <li>
+                                            <a href="#" onClick={(e) => { e.preventDefault(); onAdminClick(); }} 
+                                               className="nav-link" 
+                                               style={{color: 'var(--text-secondary)', fontSize: '0.8rem'}}
+                                               title="Admin Login">
+                                                Admin
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </header>
+            );
+        }
+
+        function Hero() {
+            return (
+                <section className="hero">
+                    <div className="container">
+                        <div className="hero-content animate-in">
+                            <h1>PREMIUM USED VEHICLES</h1>
+                            <p>Discover quality pre-owned cars in Randburg. Trusted by thousands of satisfied customers.</p>
+                            <div className="rating">
+                                <span className="stars">⭐⭐⭐⭐⭐</span>
+                                <span>4.8 Stars</span>
+                                <span style={{color: 'var(--text-secondary)'}}>|</span>
+                                <span>3,412 Google Reviews</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            );
+        }
+
+        function Filters({ filters, setFilters }) {
+            return (
+                <div className="filters">
+                    <div className="filter-grid">
+                        <div className="filter-group">
+                            <label>Search Make/Model</label>
+                            <input 
+                                type="text" 
+                                className="filter-input"
+                                placeholder="e.g., BMW, Toyota..."
+                                value={filters.search}
+                                onChange={(e) => setFilters({...filters, search: e.target.value})}
+                            />
+                        </div>
+                        <div className="filter-group">
+                            <label>Min Price (R)</label>
+                            <input 
+                                type="number" 
+                                className="filter-input"
+                                placeholder="0"
+                                value={filters.minPrice}
+                                onChange={(e) => setFilters({...filters, minPrice: e.target.value})}
+                            />
+                        </div>
+                        <div className="filter-group">
+                            <label>Max Price (R)</label>
+                            <input 
+                                type="number" 
+                                className="filter-input"
+                                placeholder="1,000,000"
+                                value={filters.maxPrice}
+                                onChange={(e) => setFilters({...filters, maxPrice: e.target.value})}
+                            />
+                        </div>
+                        <div className="filter-group">
+                            <label>Transmission</label>
+                            <select 
+                                className="filter-select"
+                                value={filters.transmission}
+                                onChange={(e) => setFilters({...filters, transmission: e.target.value})}
+                            >
+                                <option value="">All</option>
+                                <option value="Automatic">Automatic</option>
+                                <option value="Manual">Manual</option>
+                            </select>
+                        </div>
+                        <div className="filter-group">
+                            <label>Fuel Type</label>
+                            <select 
+                                className="filter-select"
+                                value={filters.fuelType}
+                                onChange={(e) => setFilters({...filters, fuelType: e.target.value})}
+                            >
+                                <option value="">All</option>
+                                <option value="Petrol">Petrol</option>
+                                <option value="Diesel">Diesel</option>
+                                <option value="Hybrid">Hybrid</option>
+                                <option value="Electric">Electric</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        function InventorySection({ cars, onCarClick }) {
+            return (
+                <section className="inventory-section" id="inventory">
+                    <div className="container">
+                        <h2 className="section-title">AVAILABLE INVENTORY</h2>
+                        {cars.length === 0 ? (
+                            <p style={{textAlign: 'center', color: 'var(--text-secondary)', fontSize: '1.2rem'}}>
+                                No vehicles match your criteria. Try adjusting your filters.
+                            </p>
+                        ) : (
+                            <div className="car-grid">
+                                {cars.map(car => <CarCard key={car.id} car={car} onCarClick={onCarClick} />)}
+                            </div>
+                        )}
+                    </div>
+                </section>
+            );
+        }
+
+        function CarCard({ car, onCarClick }) {
+            const openWhatsApp = (e) => {
+                e.stopPropagation();
+                const phone = "27646430253";
+                const message = encodeURIComponent(
+                    `Hi! I'm interested in the ${car.year} ${car.make} ${car.model} listed at R${car.price.toLocaleString()}. Is it still available?`
+                );
+                window.open(`https://wa.me/${phone}?text=${message}`, '_blank');
+            };
+
+            return (
+                <div className="car-card animate-in" onClick={() => onCarClick(car)}>
+                    <img src={car.images && car.images[0] ? car.images[0] : car.image} alt={`${car.make} ${car.model}`} className="car-image" />
+                    <div className="car-content">
+                        <div className="car-header">
+                            <h3 className="car-title">{car.year} {car.make} {car.model}</h3>
+                            <div className="car-price">R {car.price.toLocaleString()}</div>
+                        </div>
+                        <div className="car-specs">
+                            <div className="spec-item">
+                                <span>🛣️</span>
+                                <span>{car.mileage.toLocaleString()} km</span>
+                            </div>
+                            <div className="spec-item">
+                                <span>⚙️</span>
+                                <span>{car.transmission}</span>
+                            </div>
+                            <div className="spec-item">
+                                <span>⛽</span>
+                                <span>{car.fuelType}</span>
+                            </div>
+                            <div className="spec-item">
+                                <span className={`stock-badge ${car.quantity > 0 ? 'in-stock' : 'out-of-stock'}`}>
+                                    {car.quantity > 0 ? `${car.quantity} In Stock` : 'Out of Stock'}
+                                </span>
+                            </div>
+                        </div>
+                        <p style={{color: 'var(--text-secondary)', marginBottom: '15px', fontSize: '0.9rem'}}>
+                            {car.description}
+                        </p>
+                        {car.images && car.images.length > 1 && (
+                            <p style={{color: 'var(--primary)', marginBottom: '10px', fontSize: '0.85rem', textAlign: 'center'}}>
+                                📸 {car.images.length} photos available - Click to view
+                            </p>
+                        )}
+                        <button className="btn btn-primary" onClick={openWhatsApp}>
+                            💬 WhatsApp Us
+                        </button>
+                    </div>
+                </div>
+            );
+        }
+
+        function CarModal({ car, onClose }) {
+            const [currentImageIndex, setCurrentImageIndex] = useState(0);
+            const images = car.images && car.images.length > 0 ? car.images : [car.image];
+
+            useEffect(() => {
+                const handleEscape = (e) => {
+                    if (e.key === 'Escape') onClose();
+                };
+                const handleArrows = (e) => {
+                    if (e.key === 'ArrowLeft') handlePrevious();
+                    if (e.key === 'ArrowRight') handleNext();
+                };
+                document.addEventListener('keydown', handleEscape);
+                document.addEventListener('keydown', handleArrows);
+                document.body.style.overflow = 'hidden';
+                
+                return () => {
+                    document.removeEventListener('keydown', handleEscape);
+                    document.removeEventListener('keydown', handleArrows);
+                    document.body.style.overflow = 'auto';
+                };
+            }, []);
+
+            const handleNext = () => {
+                setCurrentImageIndex((prev) => (prev + 1) % images.length);
+            };
+
+            const handlePrevious = () => {
+                setCurrentImageIndex((prev) => (prev - 1 + images.length) % images.length);
+            };
+
+            const openWhatsApp = () => {
+                const phone = "27646430253";
+                const message = encodeURIComponent(
+                    `Hi! I'm interested in the ${car.year} ${car.make} ${car.model} listed at R${car.price.toLocaleString()}. Is it still available?`
+                );
+                window.open(`https://wa.me/${phone}?text=${message}`, '_blank');
+            };
+
+            return (
+                <div className="modal-overlay" onClick={onClose}>
+                    <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+                        <div className="modal-header">
+                            <h2 className="modal-title">
+                                {car.year} {car.make} {car.model}
+                            </h2>
+                            <button className="modal-close" onClick={onClose}>×</button>
+                        </div>
+
+                        <div className="slideshow-container">
+                            <img 
+                                src={images[currentImageIndex]} 
+                                alt={`${car.make} ${car.model} - Image ${currentImageIndex + 1}`}
+                                className="slideshow-image"
+                            />
+                            {images.length > 1 && (
+                                <div className="slideshow-controls">
+                                    <button 
+                                        className="slideshow-btn" 
+                                        onClick={handlePrevious}
+                                        disabled={images.length <= 1}
+                                    >
+                                        ‹
+                                    </button>
+                                    <button 
+                                        className="slideshow-btn" 
+                                        onClick={handleNext}
+                                        disabled={images.length <= 1}
+                                    >
+                                        ›
+                                    </button>
+                                </div>
+                            )}
+                        </div>
+
+                        <div className="slideshow-info">
+                            {images.length > 1 && (
+                                <>
+                                    <div className="slideshow-counter">
+                                        Photo {currentImageIndex + 1} of {images.length}
+                                    </div>
+                                    <div className="thumbnail-strip">
+                                        {images.map((img, index) => (
+                                            <img 
+                                                key={index}
+                                                src={img}
+                                                alt={`Thumbnail ${index + 1}`}
+                                                className={`thumbnail ${index === currentImageIndex ? 'active' : ''}`}
+                                                onClick={() => setCurrentImageIndex(index)}
+                                            />
+                                        ))}
+                                    </div>
+                                </>
+                            )}
+
+                            <div className="car-details-grid">
+                                <div className="detail-item">
+                                    <span className="detail-label">Price</span>
+                                    <span className="detail-value" style={{color: 'var(--primary)'}}>
+                                        R {car.price.toLocaleString()}
+                                    </span>
+                                </div>
+                                <div className="detail-item">
+                                    <span className="detail-label">Mileage</span>
+                                    <span className="detail-value">{car.mileage.toLocaleString()} km</span>
+                                </div>
+                                <div className="detail-item">
+                                    <span className="detail-label">Transmission</span>
+                                    <span className="detail-value">{car.transmission}</span>
+                                </div>
+                                <div className="detail-item">
+                                    <span className="detail-label">Fuel Type</span>
+                                    <span className="detail-value">{car.fuelType}</span>
+                                </div>
+                                <div className="detail-item">
+                                    <span className="detail-label">Year</span>
+                                    <span className="detail-value">{car.year}</span>
+                                </div>
+                                <div className="detail-item">
+                                    <span className="detail-label">Stock</span>
+                                    <span className="detail-value">
+                                        {car.quantity > 0 ? `${car.quantity} Available` : 'Out of Stock'}
+                                    </span>
+                                </div>
+                            </div>
+
+                            {car.description && (
+                                <p style={{
+                                    marginTop: '15px', 
+                                    color: 'var(--text-secondary)', 
+                                    lineHeight: '1.6'
+                                }}>
+                                    {car.description}
+                                </p>
+                            )}
+
+                            <button 
+                                className="btn btn-primary" 
+                                style={{marginTop: '20px'}}
+                                onClick={openWhatsApp}
+                            >
+                                💬 Inquire via WhatsApp
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        function WhatsAppFloat() {
+            const openWhatsApp = () => {
+                const phone = "27646430253"; // 064 643 0253 in international format
+                const message = encodeURIComponent(
+                    "Hi M Shalom Trading! I'm interested in your vehicles. Can you help me?"
+                );
+                window.open(`https://wa.me/${phone}?text=${message}`, '_blank');
+            };
+
+            return (
+                <div className="whatsapp-float" onClick={openWhatsApp}>
+                    <span className="whatsapp-tooltip">Chat with us on WhatsApp!</span>
+                    <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M16 0C7.164 0 0 7.164 0 16c0 2.832.748 5.484 2.052 7.784L.084 30.5a.5.5 0 0 0 .624.624l6.716-1.968A15.932 15.932 0 0 0 16 32c8.836 0 16-7.164 16-16S24.836 0 16 0zm0 29.333c-2.548 0-4.968-.716-7.036-1.952a.5.5 0 0 0-.416-.048l-4.912 1.44 1.44-4.912a.5.5 0 0 0-.048-.416A13.27 13.27 0 0 1 2.667 16c0-7.364 5.968-13.333 13.333-13.333S29.333 8.636 29.333 16 23.364 29.333 16 29.333z"/>
+                        <path d="M23.208 19.208c-.36-.18-2.128-1.052-2.46-1.172-.332-.12-.572-.18-.812.18-.24.36-.932 1.172-1.144 1.412-.212.24-.424.272-.784.092-.36-.18-1.52-.56-2.896-1.788-1.072-.956-1.796-2.136-2.008-2.496-.212-.36-.024-.556.156-.736.164-.164.36-.424.54-.636.18-.212.24-.36.36-.6.12-.24.06-.448-.032-.628-.092-.18-.812-1.956-1.112-2.676-.292-.704-.588-.608-.812-.62-.208-.012-.448-.016-.688-.016s-.628.092-.956.448c-.328.36-1.256 1.228-1.256 2.992s1.288 3.472 1.468 3.712c.18.24 2.536 3.872 6.14 5.428.86.372 1.532.592 2.056.76.864.272 1.648.232 2.268.14.692-.104 2.128-.868 2.428-1.708.3-.84.3-1.56.212-1.708-.088-.148-.328-.24-.688-.42z"/>
+                    </svg>
+                </div>
+            );
+        }
+
+        function AdminLogin({ onLogin }) {
+            const [username, setUsername] = useState('');
+            const [password, setPassword] = useState('');
+            const [error, setError] = useState('');
+
+            const handleLogin = (e) => {
+                e.preventDefault();
+                // Simple authentication - in production, use proper backend authentication
+                if (username === 'admin' && password === 'mshalom2024') {
+                    onLogin();
+                } else {
+                    setError('Invalid credentials');
+                }
+            };
+
+            return (
+                <div className="login-container">
+                    <div className="login-box">
+                        <h2 className="login-title">ADMIN ACCESS</h2>
+                        {error && <div className="error-message">{error}</div>}
+                        <form onSubmit={handleLogin}>
+                            <div className="form-group">
+                                <label>Username</label>
+                                <input 
+                                    type="text" 
+                                    className="form-input"
+                                    value={username}
+                                    onChange={(e) => setUsername(e.target.value)}
+                                    required
+                                />
+                            </div>
+                            <div className="form-group">
+                                <label>Password</label>
+                                <input 
+                                    type="password" 
+                                    className="form-input"
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    required
+                                />
+                            </div>
+                            <button type="submit" className="btn btn-primary">
+                                Login
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            );
+        }
+
+        function AdminPanel({ inventory, setInventory, onLogout }) {
+            const [formData, setFormData] = useState({
+                make: '',
+                model: '',
+                year: new Date().getFullYear(),
+                price: '',
+                mileage: '',
+                transmission: 'Automatic',
+                fuelType: 'Petrol',
+                quantity: 1,
+                images: [],
+                description: ''
+            });
+            const [editingId, setEditingId] = useState(null);
+            const [isDragging, setIsDragging] = useState(false);
+
+            const handleFileSelect = (e) => {
+                const files = Array.from(e.target.files);
+                processFiles(files);
+            };
+
+            const handleDragOver = (e) => {
+                e.preventDefault();
+                setIsDragging(true);
+            };
+
+            const handleDragLeave = (e) => {
+                e.preventDefault();
+                setIsDragging(false);
+            };
+
+            const handleDrop = (e) => {
+                e.preventDefault();
+                setIsDragging(false);
+                const files = Array.from(e.dataTransfer.files);
+                processFiles(files);
+            };
+
+            const processFiles = (files) => {
+                const imageFiles = files.filter(file => file.type.startsWith('image/'));
+                const remainingSlots = 6 - formData.images.length;
+                
+                if (remainingSlots === 0) {
+                    alert('Maximum 6 images allowed');
+                    return;
+                }
+
+                const filesToProcess = imageFiles.slice(0, remainingSlots);
+                
+                filesToProcess.forEach(file => {
+                    if (file.size > 5 * 1024 * 1024) {
+                        alert(`${file.name} is too large. Maximum 5MB per image.`);
+                        return;
+                    }
+
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        setFormData(prev => ({
+                            ...prev,
+                            images: [...prev.images, e.target.result]
+                        }));
+                    };
+                    reader.readAsDataURL(file);
+                });
+            };
+
+            const removeImage = (index) => {
+                setFormData(prev => ({
+                    ...prev,
+                    images: prev.images.filter((_, i) => i !== index)
+                }));
+            };
+
+            const handleSubmit = (e) => {
+                e.preventDefault();
+                
+                if (formData.images.length === 0) {
+                    alert('Please add at least one image');
+                    return;
+                }
+                
+                if (editingId) {
+                    setInventory(inventory.map(car => 
+                        car.id === editingId ? { ...formData, id: editingId } : car
+                    ));
+                    setEditingId(null);
+                } else {
+                    const newCar = {
+                        ...formData,
+                        id: Date.now(),
+                        price: parseFloat(formData.price),
+                        mileage: parseInt(formData.mileage),
+                        year: parseInt(formData.year),
+                        quantity: parseInt(formData.quantity)
+                    };
+                    setInventory([...inventory, newCar]);
+                }
+
+                // Reset form
+                setFormData({
+                    make: '',
+                    model: '',
+                    year: new Date().getFullYear(),
+                    price: '',
+                    mileage: '',
+                    transmission: 'Automatic',
+                    fuelType: 'Petrol',
+                    quantity: 1,
+                    images: [],
+                    description: ''
+                });
+            };
+
+            const handleEdit = (car) => {
+                setFormData(car);
+                setEditingId(car.id);
+            };
+
+            const handleDelete = (id) => {
+                if (confirm('Are you sure you want to delete this vehicle?')) {
+                    setInventory(inventory.filter(car => car.id !== id));
+                }
+            };
+
+            const adjustQuantity = (id, change) => {
+                setInventory(inventory.map(car => 
+                    car.id === id ? { ...car, quantity: Math.max(0, car.quantity + change) } : car
+                ));
+            };
+
+            return (
+                <div className="admin-panel">
+                    <div className="container">
+                        <div className="admin-header">
+                            <h1 className="section-title">ADMIN DASHBOARD</h1>
+                            <button className="btn btn-logout" onClick={onLogout}>
+                                Logout
+                            </button>
+                        </div>
+
+                        <div className="admin-grid">
+                            <div className="admin-form">
+                                <h3 style={{marginBottom: '20px', fontSize: '1.5rem'}}>
+                                    {editingId ? 'Edit Vehicle' : 'Add New Vehicle'}
+                                </h3>
+                                <form onSubmit={handleSubmit}>
+                                    <div className="form-group">
+                                        <label>Make</label>
+                                        <input 
+                                            type="text" 
+                                            className="form-input"
+                                            value={formData.make}
+                                            onChange={(e) => setFormData({...formData, make: e.target.value})}
+                                            required
+                                        />
+                                    </div>
+                                    <div className="form-group">
+                                        <label>Model</label>
+                                        <input 
+                                            type="text" 
+                                            className="form-input"
+                                            value={formData.model}
+                                            onChange={(e) => setFormData({...formData, model: e.target.value})}
+                                            required
+                                        />
+                                    </div>
+                                    <div className="form-group">
+                                        <label>Year</label>
+                                        <input 
+                                            type="number" 
+                                            className="form-input"
+                                            value={formData.year}
+                                            onChange={(e) => setFormData({...formData, year: e.target.value})}
+                                            required
+                                        />
+                                    </div>
+                                    <div className="form-group">
+                                        <label>Price (R)</label>
+                                        <input 
+                                            type="number" 
+                                            className="form-input"
+                                            value={formData.price}
+                                            onChange={(e) => setFormData({...formData, price: e.target.value})}
+                                            required
+                                        />
+                                    </div>
+                                    <div className="form-group">
+                                        <label>Mileage (km)</label>
+                                        <input 
+                                            type="number" 
+                                            className="form-input"
+                                            value={formData.mileage}
+                                            onChange={(e) => setFormData({...formData, mileage: e.target.value})}
+                                            required
+                                        />
+                                    </div>
+                                    <div className="form-group">
+                                        <label>Transmission</label>
+                                        <select 
+                                            className="form-input"
+                                            value={formData.transmission}
+                                            onChange={(e) => setFormData({...formData, transmission: e.target.value})}
+                                        >
+                                            <option value="Automatic">Automatic</option>
+                                            <option value="Manual">Manual</option>
+                                        </select>
+                                    </div>
+                                    <div className="form-group">
+                                        <label>Fuel Type</label>
+                                        <select 
+                                            className="form-input"
+                                            value={formData.fuelType}
+                                            onChange={(e) => setFormData({...formData, fuelType: e.target.value})}
+                                        >
+                                            <option value="Petrol">Petrol</option>
+                                            <option value="Diesel">Diesel</option>
+                                            <option value="Hybrid">Hybrid</option>
+                                            <option value="Electric">Electric</option>
+                                        </select>
+                                    </div>
+                                    <div className="form-group">
+                                        <label>Quantity</label>
+                                        <input 
+                                            type="number" 
+                                            className="form-input"
+                                            value={formData.quantity}
+                                            onChange={(e) => setFormData({...formData, quantity: e.target.value})}
+                                            min="0"
+                                            required
+                                        />
+                                    </div>
+                                    <div className="form-group">
+                                        <label>Vehicle Images (Max 6)</label>
+                                        <div 
+                                            className={`image-upload-area ${isDragging ? 'drag-over' : ''}`}
+                                            onClick={() => document.getElementById('imageInput').click()}
+                                            onDragOver={handleDragOver}
+                                            onDragLeave={handleDragLeave}
+                                            onDrop={handleDrop}
+                                        >
+                                            <div className="upload-icon">📸</div>
+                                            <p style={{color: 'var(--text-secondary)', marginBottom: '5px'}}>
+                                                Click to upload or drag & drop
+                                            </p>
+                                            <p style={{color: 'var(--text-secondary)', fontSize: '0.85rem'}}>
+                                                JPG, PNG, GIF (max 5MB each)
+                                            </p>
+                                            <input 
+                                                id="imageInput"
+                                                type="file" 
+                                                accept="image/*"
+                                                multiple
+                                                style={{display: 'none'}}
+                                                onChange={handleFileSelect}
+                                            />
+                                        </div>
+                                        {formData.images.length > 0 && (
+                                            <>
+                                                <div className="preview-grid">
+                                                    {formData.images.map((img, index) => (
+                                                        <div key={index} className="preview-item">
+                                                            <img src={img} alt={`Preview ${index + 1}`} className="preview-image" />
+                                                            <button 
+                                                                type="button"
+                                                                className="preview-remove"
+                                                                onClick={(e) => {
+                                                                    e.stopPropagation();
+                                                                    removeImage(index);
+                                                                }}
+                                                            >
+                                                                ×
+                                                            </button>
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                                <div className={`image-count ${formData.images.length >= 6 ? 'limit-reached' : ''}`}>
+                                                    {formData.images.length} of 6 images uploaded
+                                                    {formData.images.length >= 6 && ' (Maximum reached)'}
+                                                </div>
+                                            </>
+                                        )}
+                                    </div>
+                                    <div className="form-group">
+                                        <label>Description</label>
+                                        <textarea 
+                                            className="form-textarea"
+                                            value={formData.description}
+                                            onChange={(e) => setFormData({...formData, description: e.target.value})}
+                                            required
+                                        />
+                                    </div>
+                                    <button type="submit" className="btn btn-primary" disabled={formData.images.length === 0}>
+                                        {editingId ? 'Update Vehicle' : 'Add Vehicle'}
+                                        {formData.images.length === 0 && ' (Add at least 1 image)'}
+                                    </button>
+                                    {editingId && (
+                                        <button 
+                                            type="button" 
+                                            className="btn btn-danger" 
+                                            style={{marginTop: '10px'}}
+                                            onClick={() => {
+                                                setEditingId(null);
+                                                setFormData({
+                                                    make: '',
+                                                    model: '',
+                                                    year: new Date().getFullYear(),
+                                                    price: '',
+                                                    mileage: '',
+                                                    transmission: 'Automatic',
+                                                    fuelType: 'Petrol',
+                                                    quantity: 1,
+                                                    images: [],
+                                                    description: ''
+                                                });
+                                            }}
+                                        >
+                                            Cancel Edit
+                                        </button>
+                                    )}
+                                </form>
+                            </div>
+
+                            <div className="admin-table">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Vehicle</th>
+                                            <th>Price</th>
+                                            <th>Quantity</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {inventory.map(car => (
+                                            <tr key={car.id}>
+                                                <td>
+                                                    <div>
+                                                        <strong>{car.year} {car.make} {car.model}</strong>
+                                                        <br/>
+                                                        <small style={{color: 'var(--text-secondary)'}}>
+                                                            {car.mileage.toLocaleString()}km • {car.transmission} • {car.fuelType}
+                                                        </small>
+                                                        <br/>
+                                                        <small style={{color: 'var(--primary)'}}>
+                                                            📸 {car.images ? car.images.length : (car.image ? 1 : 0)} image(s)
+                                                        </small>
+                                                    </div>
+                                                </td>
+                                                <td>R {car.price.toLocaleString()}</td>
+                                                <td>
+                                                    <div className="action-buttons">
+                                                        <button 
+                                                            className="btn btn-small btn-danger"
+                                                            onClick={() => adjustQuantity(car.id, -1)}
+                                                            disabled={car.quantity === 0}
+                                                        >
+                                                            -
+                                                        </button>
+                                                        <span style={{padding: '6px 12px'}}>{car.quantity}</span>
+                                                        <button 
+                                                            className="btn btn-small btn-success"
+                                                            onClick={() => adjustQuantity(car.id, 1)}
+                                                        >
+                                                            +
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div className="action-buttons">
+                                                        <button 
+                                                            className="btn btn-small btn-primary"
+                                                            onClick={() => handleEdit(car)}
+                                                        >
+                                                            Edit
+                                                        </button>
+                                                        <button 
+                                                            className="btn btn-small btn-danger"
+                                                            onClick={() => handleDelete(car.id)}
+                                                        >
+                                                            Delete
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        function Footer() {
+            return (
+                <footer id="contact">
+                    <div className="container">
+                        <div className="footer-content">
+                            <div className="footer-section">
+                                <h3>M SHALOM TRADING</h3>
+                                <p>Your trusted partner for quality used vehicles in Randburg.</p>
+                                <p>Serving customers since 2010 with integrity and excellence.</p>
+                            </div>
+                            <div className="footer-section">
+                                <h3>CONTACT INFO</h3>
+                                <p>📞 064 643 0253</p>
+                                <p>📍 407 Eton Ave, Ferndale</p>
+                                <p>Randburg, 2194</p>
+                            </div>
+                            <div className="footer-section">
+                                <h3>OPENING HOURS</h3>
+                                <p>Monday - Friday: 8am - 5pm</p>
+                                <p>Saturday: 8am - 3pm</p>
+                                <p>Sunday: Closed</p>
+                            </div>
+                            <div className="footer-section">
+                                <h3>FOLLOW US</h3>
+                                <a href="https://www.tiktok.com/@m.shalom.trading" target="_blank">TikTok</a>
+                                <a href="https://www.facebook.com/people/M-shalom-Trading/" target="_blank">Facebook</a>
+                                <a href="https://www.instagram.com/mshalom_trading/" target="_blank">Instagram</a>
+                            </div>
+                        </div>
+                        <div className="footer-bottom">
+                            <p>&copy; 2024 M Shalom Trading. All rights reserved. | Designed with passion for automotive excellence</p>
+                        </div>
+                    </div>
+                </footer>
+            );
+        }
+
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+</body>
+</html>
