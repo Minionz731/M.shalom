@@ -1800,7 +1800,7 @@
 
                             {car.description && (
                                 <p style={{
-                                    marginTop: 'var(--space-md)', 
+                                    marginTop: '24px', 
                                     color: 'var(--text-secondary)', 
                                     lineHeight: '1.6'
                                 }}>
@@ -1810,7 +1810,7 @@
 
                             <button 
                                 className="btn btn-primary" 
-                                style={{marginTop: 'var(--space-lg)', width: '100%'}}
+                                style={{marginTop: '32px', width: '100%'}}
                                 onClick={openWhatsApp}
                             >
                                 💬 Inquire via WhatsApp
@@ -2108,7 +2108,7 @@
 
                         <div className="admin-grid">
                             <div className="admin-form">
-                                <h3 style={{marginBottom: 'var(--space-lg)', fontSize: 'var(--text-h3)'}}>
+                                <h3 style={{marginBottom: '32px', fontSize: 'var(--text-h3)'}}>
                                     {editingId ? 'Edit Vehicle' : 'Add New Vehicle'}
                                 </h3>
                                 <form onSubmit={handleSubmit}>
@@ -2207,7 +2207,7 @@
                                             onDrop={handleDrop}
                                         >
                                             <div className="upload-icon">📸</div>
-                                            <p style={{color: 'var(--text-secondary)', marginBottom: var('--space-xs')}}>
+                                            <p style={{color: 'var(--text-secondary)', marginBottom: '8px'}}>
                                                 {uploading ? 'Uploading...' : 'Click to upload or drag & drop'}
                                             </p>
                                             <p style={{color: 'var(--text-secondary)', fontSize: '13px'}}>
@@ -2274,7 +2274,7 @@
                                         <button 
                                             type="button" 
                                             className="btn btn-danger" 
-                                            style={{marginTop: 'var(--space-sm)'}}
+                                            style={{marginTop: '8px'}}
                                             onClick={() => {
                                                 setEditingId(null);
                                                 setFormData({
