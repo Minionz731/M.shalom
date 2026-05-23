@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>M Shalom Trading - Premium Used Cars Randburg</title>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -16,16 +16,44 @@
     
     <style>
         :root {
-            --primary: #D4AF37;
-            --primary-dark: #B8941F;
-            --bg-dark: #0A0A0A;
-            --bg-card: #1A1A1A;
-            --bg-hover: #252525;
+            /* Colors */
+            --primary: #C9A961;
+            --primary-dark: #B39450;
+            --bg-black: #0A0A0A;
+            --bg-dark: #141414;
+            --bg-card: #1C1C1C;
+            --bg-elevated: #242424;
+            --bg-hover: #2A2A2A;
             --text-primary: #FFFFFF;
             --text-secondary: #B0B0B0;
+            --text-tertiary: #808080;
+            --text-muted: #606060;
             --border: #2A2A2A;
+            --border-light: #333333;
             --success: #10B981;
-            --danger: #EF4444;
+            --danger: #DC2626;
+            
+            /* Typography Scale - Systematic */
+            --text-display: 56px;
+            --text-h1: 40px;
+            --text-h2: 32px;
+            --text-h3: 24px;
+            --text-h4: 18px;
+            --text-body: 16px;
+            --text-small: 14px;
+            --text-caption: 12px;
+            
+            /* Spacing Scale - 8px Grid */
+            --space-xs: 8px;
+            --space-sm: 16px;
+            --space-md: 24px;
+            --space-lg: 32px;
+            --space-xl: 40px;
+            --space-2xl: 48px;
+            --space-3xl: 64px;
+            --space-4xl: 80px;
+            --space-5xl: 96px;
+            --space-6xl: 120px;
         }
 
         * {
@@ -35,137 +63,154 @@
         }
 
         body {
-            font-family: 'Outfit', sans-serif;
-            background: var(--bg-dark);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--bg-black);
             color: var(--text-primary);
             line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
         .container {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 var(--space-2xl);
         }
 
-        /* Header Styles */
-        header {
-            background: linear-gradient(180deg, rgba(26, 26, 26, 0.98) 0%, rgba(10, 10, 10, 0.95) 100%);
-            backdrop-filter: blur(10px);
-            position: sticky;
+        /* Loading Intro - Simplified Professional */
+        .loading-intro {
+            position: fixed;
             top: 0;
-            z-index: 1000;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .header-top {
-            background: var(--bg-card);
-            padding: 10px 0;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .header-top .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-
-        .contact-info {
-            display: flex;
-            gap: 30px;
-            flex-wrap: wrap;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-        }
-
-        .social-links {
-            display: flex;
-            gap: 15px;
-        }
-
-        .social-link {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            background: var(--bg-hover);
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: #000;
+            z-index: 10000;
             display: flex;
             align-items: center;
             justify-content: center;
+            overflow: hidden;
+            animation: fadeOut 0.8s ease 1.2s forwards;
+        }
+
+        @keyframes fadeOut {
+            to {
+                opacity: 0;
+                visibility: hidden;
+            }
+        }
+
+        .logo-simple {
+            font-family: 'Playfair Display', serif;
+            font-size: 48px;
+            font-weight: 800;
+            letter-spacing: 2px;
             color: var(--primary);
-            text-decoration: none;
+            opacity: 0;
+            animation: logoFade 0.8s ease 0.2s forwards;
+        }
+
+        @keyframes logoFade {
+            to { opacity: 1; }
+        }
+
+        /* Hide gimmicky template elements */
+        .logo-animation,
+        .logo-outline,
+        .logo-text-intro,
+        .car-silhouette,
+        .headlight-glow,
+        .rating,
+        .stars,
+        .hero-subtitle,
+        .stock-badge,
+        .in-stock,
+        .out-of-stock,
+        .header-top,
+        .contact-info,
+        .contact-item,
+        .social-links {
+            display: none !important;
+        }
+
+        /* Header - Clean Professional */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            height: 64px;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
             transition: all 0.3s ease;
-            border: 1px solid var(--border);
         }
 
-        .social-link:hover {
-            background: var(--primary);
-            color: var(--bg-dark);
-            transform: translateY(-2px);
-            border-color: var(--primary);
-        }
-
-        .header-main {
-            padding: 20px 0;
+        header.scrolled {
+            background: rgba(10, 10, 10, 0.98);
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5);
         }
 
         .header-content {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            flex-wrap: wrap;
-            gap: 20px;
+            height: 100%;
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 var(--space-2xl);
         }
 
         .logo {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 2.5rem;
-            letter-spacing: 3px;
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: 1px;
             color: var(--primary);
-            text-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+            text-decoration: none;
+            transition: opacity 0.3s;
         }
 
-        .logo span {
-            color: var(--text-primary);
+        .logo:hover {
+            opacity: 0.8;
         }
 
         .logo-image {
-            height: 60px;
+            height: 40px;
             width: auto;
         }
 
         .nav-links {
             display: flex;
-            gap: 30px;
+            gap: var(--space-2xl);
             list-style: none;
+            align-items: center;
         }
 
         .nav-link {
             color: var(--text-secondary);
             text-decoration: none;
-            font-weight: 500;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
             transition: color 0.3s;
             position: relative;
         }
 
         .nav-link:hover {
-            color: var(--primary);
+            color: var(--text-primary);
         }
 
         .nav-link::after {
             content: '';
             position: absolute;
-            bottom: -5px;
+            bottom: -8px;
             left: 0;
             width: 0;
             height: 2px;
-            background: var(--primary);
+            background: var(--text-primary);
             transition: width 0.3s;
         }
 
@@ -173,12 +218,97 @@
             width: 100%;
         }
 
-        /* Hero Section */
+        .header-cta {
+            padding: 12px 24px;
+            background: transparent;
+            color: var(--text-secondary);
+            border: 1px solid var(--border-light);
+            border-radius: 4px;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-xs);
+        }
+
+        .header-cta:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        /* Admin Icon Button - Subtle */
+        .admin-icon-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            padding: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            opacity: 0.4;
+        }
+
+        .admin-icon-btn:hover {
+            color: var(--text-secondary);
+            opacity: 0.7;
+        }
+
+        .admin-icon-btn svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        /* Hero Section - With Video Background */
         .hero {
-            background: linear-gradient(135deg, #1A1A1A 0%, #0A0A0A 100%);
-            padding: 80px 0;
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            padding: calc(var(--space-6xl) + 64px) 0 var(--space-5xl);
+            margin-top: 64px;
             position: relative;
             overflow: hidden;
+        }
+
+        .hero-video-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+        }
+
+        /* Cover watermark in bottom-right */
+        .watermark-cover {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 180px;
+            height: 80px;
+            background: linear-gradient(to left, rgba(10, 10, 10, 1) 0%, transparent 100%);
+            z-index: 1;
+        }
+
+        .hero-video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                180deg,
+                rgba(10, 10, 10, 0.7) 0%,
+                rgba(10, 10, 10, 0.85) 50%,
+                rgba(10, 10, 10, 0.95) 100%
+            );
+            z-index: 2;
         }
 
         .hero::before {
@@ -188,221 +318,456 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse"><path d="M 100 0 L 0 0 0 100" fill="none" stroke="rgba(212,175,55,0.05)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grid)"/></svg>');
-            opacity: 0.3;
+            background: radial-gradient(circle at 30% 50%, rgba(201, 169, 97, 0.05) 0%, transparent 50%);
+            z-index: 2;
         }
 
         .hero-content {
             position: relative;
-            z-index: 1;
-            text-align: center;
+            z-index: 3;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 var(--space-2xl);
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-eyebrow {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: var(--space-md);
+            opacity: 0;
+            animation: slideUp 0.8s ease 0.2s forwards;
         }
 
         .hero h1 {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 4rem;
-            letter-spacing: 4px;
-            margin-bottom: 20px;
-            background: linear-gradient(135deg, var(--primary) 0%, #FFD700 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .hero p {
-            font-size: 1.3rem;
-            color: var(--text-secondary);
+            font-family: 'Playfair Display', serif;
+            font-size: var(--text-display);
+            font-weight: 700;
+            line-height: 1.1;
+            letter-spacing: -1px;
+            margin-bottom: var(--space-md);
+            color: var(--text-primary);
+            opacity: 0;
+            animation: slideUp 0.8s ease 0.4s forwards;
             max-width: 800px;
-            margin: 0 auto 30px;
         }
 
-        .rating {
+        .hero-description {
+            font-size: var(--text-body);
+            line-height: 1.6;
+            color: var(--text-secondary);
+            max-width: 500px;
+            margin-bottom: var(--space-2xl);
+            opacity: 0;
+            animation: slideUp 0.8s ease 0.6s forwards;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: var(--space-sm);
+            align-items: center;
+            opacity: 0;
+            animation: slideUp 0.8s ease 0.8s forwards;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            padding: var(--space-sm) var(--space-lg);
+            background: var(--primary);
+            color: var(--bg-black);
+            border: none;
+            border-radius: 4px;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none;
             display: inline-flex;
             align-items: center;
-            gap: 10px;
-            background: var(--bg-card);
-            padding: 15px 30px;
-            border-radius: 50px;
-            border: 1px solid var(--border);
+            gap: var(--space-xs);
         }
 
-        .stars {
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-1px);
+            box-shadow: 0 8px 16px rgba(201, 169, 97, 0.25);
+        }
+
+        .btn-secondary {
+            padding: var(--space-sm) var(--space-lg);
+            background: transparent;
+            color: var(--text-primary);
+            border: 1px solid var(--border-light);
+            border-radius: 4px;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-xs);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--primary);
             color: var(--primary);
-            font-size: 1.2rem;
+            transform: translateY(-1px);
         }
 
-        /* Filters */
-        .filters {
+        /* Inventory Controls - Clean */
+        .inventory-controls {
+            margin-bottom: var(--space-6xl);
+            padding: var(--space-3xl) 0;
+        }
+
+        .search-bar {
+            margin-bottom: var(--space-md);
+        }
+
+        .search-bar input {
+            width: 100%;
+            max-width: 600px;
+            padding: var(--space-sm) var(--space-lg);
             background: var(--bg-card);
-            padding: 30px;
-            border-radius: 12px;
-            margin: -50px auto 50px;
-            position: relative;
-            z-index: 2;
-            max-width: 1200px;
             border: 1px solid var(--border);
+            border-radius: 4px;
+            font-size: 15px;
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            transition: all 0.3s;
         }
 
-        .filter-grid {
+        .search-bar input:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: var(--bg-elevated);
+            box-shadow: 0 0 0 1px var(--primary);
+        }
+
+        .search-bar input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .filter-pills {
+            display: flex;
+            gap: var(--space-sm);
+            flex-wrap: wrap;
+        }
+
+        .pill {
+            padding: 10px 20px;
+            background: transparent;
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .pill:hover {
+            border-color: var(--border-light);
+            color: var(--text-primary);
+        }
+
+        .pill.active {
+            background: var(--bg-elevated);
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        /* Advanced Filters Panel */
+        .advanced-filters {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            padding: var(--space-lg);
+            margin-top: var(--space-md);
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
+            gap: var(--space-md);
         }
 
         .filter-group {
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: var(--space-xs);
         }
 
-        .filter-group label {
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-            font-weight: 500;
+        .filter-label {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            color: var(--text-muted);
         }
 
-        .filter-input,
-        .filter-select {
-            padding: 12px 15px;
-            background: var(--bg-dark);
+        .filter-select,
+        .filter-input {
+            width: 100%;
+            padding: 12px 16px;
+            background: var(--bg-elevated);
             border: 1px solid var(--border);
-            border-radius: 8px;
+            border-radius: 4px;
             color: var(--text-primary);
-            font-family: 'Outfit', sans-serif;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
             transition: all 0.3s;
+            cursor: pointer;
         }
 
-        .filter-input:focus,
-        .filter-select:focus {
+        .filter-select:focus,
+        .filter-input:focus {
             outline: none;
             border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+            box-shadow: 0 0 0 1px var(--primary);
         }
 
-        /* Car Grid */
+        .filter-select option {
+            background: var(--bg-elevated);
+            color: var(--text-primary);
+        }
+
+        .price-range-inputs {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: var(--space-xs);
+            align-items: center;
+        }
+
+        .price-separator {
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        .filter-actions {
+            display: flex;
+            gap: var(--space-sm);
+            margin-top: var(--space-md);
+        }
+
+        .btn-filter {
+            padding: 10px 20px;
+            background: transparent;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-filter:hover {
+            border-color: var(--border-light);
+            color: var(--text-primary);
+        }
+
+        .btn-filter-clear {
+            color: var(--text-muted);
+        }
+
+        .btn-filter-clear:hover {
+            color: var(--danger);
+            border-color: var(--danger);
+        }
+
+        .filter-toggle {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-xs);
+            padding: 10px 20px;
+            background: transparent;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: var(--space-md);
+        }
+
+        .filter-toggle:hover {
+            border-color: var(--border-light);
+            color: var(--text-primary);
+        }
+
+        .filter-toggle.active {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .results-count {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-top: var(--space-md);
+        }
+
+        .results-count strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        /* Inventory Section */
         .inventory-section {
-            padding: 50px 0;
+            padding: var(--space-6xl) 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: var(--space-6xl);
+        }
+
+        .section-subtitle {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: var(--space-md);
         }
 
         .section-title {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 3rem;
-            letter-spacing: 3px;
-            margin-bottom: 40px;
+            font-family: 'Playfair Display', serif;
+            font-size: var(--text-h1);
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin-bottom: var(--space-lg);
+            line-height: 1.2;
+        }
+
+        .section-description {
+            font-size: var(--text-body);
+            line-height: 1.6;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .vehicle-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: var(--space-lg);
+            margin-bottom: var(--space-4xl);
+        }
+
+        .vehicle-card {
+            background: var(--bg-card);
+            overflow: hidden;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+        }
+
+        .vehicle-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--border-light);
+            box-shadow: 0 12px 48px rgba(0, 0, 0, 0.6);
+        }
+
+        .vehicle-image {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            background: var(--bg-elevated);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .vehicle-card:hover .vehicle-image {
+            transform: scale(1.05);
+        }
+
+        .vehicle-content {
+            padding: var(--space-lg);
+        }
+
+        .vehicle-header {
+            margin-bottom: var(--space-md);
+        }
+
+        .vehicle-title {
+            font-size: var(--text-h3);
+            font-weight: 600;
+            margin-bottom: var(--space-xs);
+            letter-spacing: -0.3px;
+            line-height: 1.3;
+        }
+
+        .vehicle-price {
+            font-family: 'Playfair Display', serif;
+            font-size: var(--text-h2);
+            font-weight: 700;
+            color: var(--primary);
+            letter-spacing: -0.5px;
+        }
+
+        .vehicle-meta {
+            font-size: var(--text-small);
+            color: var(--text-secondary);
+            margin-bottom: var(--space-md);
+            padding-bottom: var(--space-md);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .vehicle-description {
+            color: var(--text-secondary);
+            margin-bottom: var(--space-md);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .vehicle-image-count {
+            color: var(--primary);
+            margin-bottom: var(--space-md);
+            font-size: 12px;
             text-align: center;
         }
 
-        .car-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 30px;
-            margin-bottom: 50px;
-        }
-
-        .car-card {
-            background: var(--bg-card);
-            border-radius: 12px;
-            overflow: hidden;
-            border: 1px solid var(--border);
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        .car-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--primary);
-            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2);
-        }
-
-        .car-image {
+        .btn-vehicle-cta {
             width: 100%;
-            height: 250px;
-            object-fit: cover;
-            background: var(--bg-dark);
-        }
-
-        .car-content {
-            padding: 20px;
-        }
-
-        .car-header {
-            margin-bottom: 15px;
-        }
-
-        .car-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 5px;
-        }
-
-        .car-price {
-            font-size: 1.8rem;
-            color: var(--primary);
-            font-weight: 700;
-        }
-
-        .car-specs {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
-            margin-bottom: 15px;
-        }
-
-        .spec-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-        }
-
-        .stock-badge {
-            display: inline-block;
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 0.85rem;
+            padding: var(--space-sm);
+            background: transparent;
+            color: var(--text-primary);
+            border: 1px solid var(--border-light);
+            border-radius: 4px;
+            font-size: 13px;
             font-weight: 600;
-        }
-
-        .in-stock {
-            background: rgba(16, 185, 129, 0.2);
-            color: var(--success);
-            border: 1px solid var(--success);
-        }
-
-        .out-of-stock {
-            background: rgba(239, 68, 68, 0.2);
-            color: var(--danger);
-            border: 1px solid var(--danger);
-        }
-
-        .btn {
-            padding: 12px 24px;
-            border: none;
-            border-radius: 8px;
-            font-family: 'Outfit', sans-serif;
-            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
             cursor: pointer;
             transition: all 0.3s;
-            font-size: 1rem;
         }
 
-        .btn-primary {
-            background: var(--primary);
-            color: var(--bg-dark);
-            width: 100%;
-        }
-
-        .btn-primary:hover {
-            background: var(--primary-dark);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
-        }
-
-        .btn-primary:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-            transform: none;
+        .btn-vehicle-cta:hover {
+            border-color: var(--primary);
+            color: var(--primary);
         }
 
         /* Loading States */
@@ -429,14 +794,14 @@
         /* Admin Panel */
         .admin-panel {
             min-height: 100vh;
-            padding: 50px 0;
+            padding: var(--space-4xl) 0;
         }
 
         .admin-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 40px;
+            margin-bottom: var(--space-4xl);
         }
 
         .btn-logout {
@@ -451,37 +816,39 @@
         .admin-grid {
             display: grid;
             grid-template-columns: 1fr 2fr;
-            gap: 30px;
-            margin-bottom: 50px;
+            gap: var(--space-2xl);
+            margin-bottom: var(--space-4xl);
         }
 
         .admin-form {
             background: var(--bg-card);
-            padding: 30px;
+            padding: var(--space-2xl);
             border-radius: 12px;
             border: 1px solid var(--border);
         }
 
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: var(--space-lg);
         }
 
         .form-group label {
             display: block;
-            margin-bottom: 8px;
+            margin-bottom: var(--space-xs);
             color: var(--text-secondary);
             font-weight: 500;
         }
 
         .form-input,
-        .form-textarea {
+        .form-textarea,
+        .form-select {
             width: 100%;
             padding: 12px 15px;
             background: var(--bg-dark);
             border: 1px solid var(--border);
-            border-radius: 8px;
+            border-radius: 4px;
             color: var(--text-primary);
-            font-family: 'Outfit', sans-serif;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
         }
 
         .form-textarea {
@@ -490,7 +857,8 @@
         }
 
         .form-input:focus,
-        .form-textarea:focus {
+        .form-textarea:focus,
+        .form-select:focus {
             outline: none;
             border-color: var(--primary);
         }
@@ -498,7 +866,7 @@
         .admin-table {
             width: 100%;
             background: var(--bg-card);
-            border-radius: 12px;
+            border-radius: 4px;
             overflow: hidden;
             border: 1px solid var(--border);
         }
@@ -513,15 +881,19 @@
         }
 
         th {
-            padding: 15px;
+            padding: var(--space-md);
             text-align: left;
             font-weight: 600;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
             border-bottom: 1px solid var(--border);
         }
 
         td {
-            padding: 15px;
+            padding: var(--space-md);
             border-bottom: 1px solid var(--border);
+            font-size: 14px;
         }
 
         tbody tr:hover {
@@ -530,7 +902,7 @@
 
         .action-buttons {
             display: flex;
-            gap: 10px;
+            gap: var(--space-xs);
         }
 
         .btn-small {
@@ -548,6 +920,23 @@
             color: white;
         }
 
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
         /* Login Form */
         .login-container {
             min-height: 100vh;
@@ -558,72 +947,31 @@
 
         .login-box {
             background: var(--bg-card);
-            padding: 50px;
-            border-radius: 12px;
+            padding: var(--space-4xl);
+            border-radius: 4px;
             border: 1px solid var(--border);
             max-width: 450px;
             width: 100%;
         }
 
         .login-title {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 2.5rem;
-            letter-spacing: 2px;
+            font-family: 'Playfair Display', serif;
+            font-size: var(--text-h1);
+            font-weight: 800;
+            letter-spacing: -0.5px;
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: var(--space-2xl);
             color: var(--primary);
         }
 
         .error-message {
             background: rgba(239, 68, 68, 0.2);
             color: var(--danger);
-            padding: 12px;
-            border-radius: 8px;
-            margin-bottom: 20px;
+            padding: var(--space-sm);
+            border-radius: 4px;
+            margin-bottom: var(--space-md);
             text-align: center;
             border: 1px solid var(--danger);
-        }
-
-        /* Footer */
-        footer {
-            background: var(--bg-card);
-            padding: 50px 0 20px;
-            border-top: 1px solid var(--border);
-            margin-top: 100px;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            margin-bottom: 30px;
-        }
-
-        .footer-section h3 {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 1.5rem;
-            letter-spacing: 2px;
-            margin-bottom: 15px;
-            color: var(--primary);
-        }
-
-        .footer-section p,
-        .footer-section a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            display: block;
-            margin-bottom: 10px;
-        }
-
-        .footer-section a:hover {
-            color: var(--primary);
-        }
-
-        .footer-bottom {
-            text-align: center;
-            padding-top: 30px;
-            border-top: 1px solid var(--border);
-            color: var(--text-secondary);
         }
 
         /* Modal and Slideshow Styles */
@@ -659,15 +1007,16 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px;
+            padding: var(--space-lg);
             background: var(--bg-card);
-            border-radius: 12px 12px 0 0;
+            border-radius: 4px 4px 0 0;
         }
 
         .modal-title {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 2rem;
-            letter-spacing: 2px;
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
             color: var(--primary);
         }
 
@@ -698,14 +1047,14 @@
             align-items: center;
             justify-content: center;
             background: var(--bg-dark);
-            padding: 20px;
+            padding: var(--space-lg);
         }
 
         .slideshow-image {
             max-width: 100%;
             max-height: 60vh;
             object-fit: contain;
-            border-radius: 8px;
+            border-radius: 4px;
             animation: slideIn 0.3s ease;
         }
 
@@ -727,7 +1076,7 @@
             width: 100%;
             display: flex;
             justify-content: space-between;
-            padding: 0 20px;
+            padding: 0 var(--space-lg);
             pointer-events: none;
         }
 
@@ -760,28 +1109,30 @@
 
         .slideshow-info {
             background: var(--bg-card);
-            padding: 20px;
-            border-radius: 0 0 12px 12px;
+            padding: var(--space-lg);
+            border-radius: 0 0 4px 4px;
         }
 
         .slideshow-counter {
             text-align: center;
             color: var(--text-secondary);
-            margin-bottom: 15px;
+            margin-bottom: var(--space-md);
+            font-size: 13px;
         }
 
         .thumbnail-strip {
             display: flex;
-            gap: 10px;
+            gap: var(--space-xs);
             overflow-x: auto;
-            padding: 10px 0;
+            padding: var(--space-sm) 0;
+            margin-bottom: var(--space-md);
         }
 
         .thumbnail {
             width: 80px;
             height: 60px;
             object-fit: cover;
-            border-radius: 6px;
+            border-radius: 4px;
             cursor: pointer;
             border: 2px solid transparent;
             transition: all 0.3s;
@@ -798,13 +1149,13 @@
             box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
         }
 
-        .car-details-grid {
+        .vehicle-details-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            margin-top: 15px;
-            padding-top: 15px;
-            border-top: 1px solid var(--border);
+            gap: var(--space-md);
+            margin-bottom: var(--space-md);
+            padding-bottom: var(--space-md);
+            border-bottom: 1px solid var(--border);
         }
 
         .detail-item {
@@ -815,19 +1166,22 @@
 
         .detail-label {
             color: var(--text-secondary);
-            font-size: 0.85rem;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 500;
         }
 
         .detail-value {
             color: var(--text-primary);
             font-weight: 600;
-            font-size: 1.1rem;
+            font-size: 16px;
         }
 
         .image-upload-area {
             border: 2px dashed var(--border);
-            border-radius: 8px;
-            padding: 20px;
+            border-radius: 4px;
+            padding: var(--space-lg);
             text-align: center;
             cursor: pointer;
             transition: all 0.3s;
@@ -846,22 +1200,22 @@
 
         .upload-icon {
             font-size: 3rem;
-            margin-bottom: 10px;
+            margin-bottom: var(--space-sm);
             opacity: 0.5;
         }
 
         .preview-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-            gap: 10px;
-            margin-top: 15px;
+            gap: var(--space-sm);
+            margin-top: var(--space-md);
         }
 
         .preview-item {
             position: relative;
             width: 100%;
             padding-bottom: 75%;
-            border-radius: 6px;
+            border-radius: 4px;
             overflow: hidden;
             border: 1px solid var(--border);
         }
@@ -899,9 +1253,9 @@
         }
 
         .image-count {
-            margin-top: 10px;
+            margin-top: var(--space-sm);
             color: var(--text-secondary);
-            font-size: 0.9rem;
+            font-size: 13px;
         }
 
         .image-count.limit-reached {
@@ -909,10 +1263,10 @@
         }
 
         .upload-progress {
-            margin-top: 15px;
+            margin-top: var(--space-md);
             background: var(--bg-dark);
-            border-radius: 8px;
-            padding: 10px;
+            border-radius: 4px;
+            padding: var(--space-sm);
         }
 
         .progress-bar {
@@ -929,8 +1283,8 @@
         }
 
         .progress-text {
-            margin-top: 5px;
-            font-size: 0.85rem;
+            margin-top: var(--space-xs);
+            font-size: 12px;
             color: var(--text-secondary);
             text-align: center;
         }
@@ -938,59 +1292,105 @@
         /* Floating WhatsApp Button */
         .whatsapp-float {
             position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 60px;
-            height: 60px;
-            background: #25D366;
+            bottom: var(--space-2xl);
+            right: var(--space-2xl);
+            width: 64px;
+            height: 64px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-light);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
             cursor: pointer;
             z-index: 1000;
-            transition: all 0.3s ease;
-            animation: pulse 2s infinite;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .whatsapp-float:hover {
-            transform: scale(1.1);
-            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6);
+            transform: translateY(-4px);
+            border-color: var(--primary);
+            background: var(--bg-elevated);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6);
         }
 
         .whatsapp-float svg {
-            width: 35px;
-            height: 35px;
-            fill: white;
+            width: 28px;
+            height: 28px;
+            fill: var(--text-secondary);
+            transition: fill 0.3s;
         }
 
-        @keyframes pulse {
-            0%, 100% {
-                box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
-            }
-            50% {
-                box-shadow: 0 4px 20px rgba(37, 211, 102, 0.7);
-            }
+        .whatsapp-float:hover svg {
+            fill: #25D366;
         }
 
         .whatsapp-tooltip {
             position: absolute;
-            right: 70px;
-            background: white;
-            color: #333;
-            padding: 8px 15px;
-            border-radius: 8px;
-            font-size: 0.9rem;
+            right: 75px;
+            background: var(--bg-elevated);
+            color: var(--text-primary);
+            padding: 10px 18px;
+            border: 1px solid var(--border-light);
+            font-size: 13px;
+            font-weight: 500;
             white-space: nowrap;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.4);
             opacity: 0;
             pointer-events: none;
             transition: opacity 0.3s;
+            border-radius: 4px;
         }
 
         .whatsapp-float:hover .whatsapp-tooltip {
             opacity: 1;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-dark);
+            padding: var(--space-5xl) 0 var(--space-2xl);
+            border-top: 1px solid var(--border);
+            margin-top: var(--space-6xl);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--space-4xl);
+            margin-bottom: var(--space-4xl);
+        }
+
+        .footer-section h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: var(--text-h3);
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            margin-bottom: var(--space-md);
+            color: var(--primary);
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            display: block;
+            margin-bottom: var(--space-sm);
+            font-size: 15px;
+            line-height: 1.6;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: var(--primary);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: var(--space-lg);
+            border-top: 1px solid var(--border);
+            color: var(--text-secondary);
+            font-size: 14px;
         }
 
         /* Animations */
@@ -1009,135 +1409,190 @@
             animation: fadeInUp 0.6s ease-out;
         }
 
-        /* Firebase Config Warning */
+        /* Config Warning */
         .config-warning {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            background: var(--danger);
-            color: white;
-            padding: 15px;
-            text-align: center;
-            z-index: 3000;
-            font-weight: 600;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: var(--space-2xl);
         }
 
-        .config-warning a {
-            color: white;
-            text-decoration: underline;
+        .config-warning-box {
+            background: var(--bg-card);
+            padding: var(--space-3xl);
+            border-radius: 4px;
+            max-width: 600px;
+            border: 2px solid var(--danger);
+        }
+
+        .config-warning-box h2 {
+            color: var(--danger);
+            margin-bottom: var(--space-lg);
+            font-size: var(--text-h2);
+        }
+
+        .config-warning-box p {
+            margin-bottom: var(--space-md);
+            line-height: 1.8;
+        }
+
+        .config-warning-box ol {
+            margin-left: var(--space-lg);
+            line-height: 2;
+        }
+
+        .config-code {
+            margin-top: var(--space-lg);
+            padding: var(--space-md);
+            background: var(--bg-dark);
+            border-radius: 4px;
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        .config-code code {
+            color: var(--primary);
         }
 
         /* Responsive */
-        @media (max-width: 768px) {
+        @media (max-width: 1024px) {
             .hero h1 {
-                font-size: 2.5rem;
+                font-size: 48px;
             }
 
-            .car-grid {
+            .section-title {
+                font-size: 32px;
+            }
+
+            .vehicle-grid {
+                grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                padding: calc(var(--space-5xl) + 64px) 0 var(--space-4xl);
+                min-height: 80vh;
+            }
+
+            .hero h1 {
+                font-size: 40px;
+            }
+
+            .hero-description {
+                font-size: 16px;
+            }
+
+            .section-title {
+                font-size: 32px;
+            }
+
+            .inventory-section {
+                padding: var(--space-5xl) 0;
+            }
+
+            .section-header {
+                margin-bottom: var(--space-4xl);
+            }
+
+            .vehicle-grid {
                 grid-template-columns: 1fr;
+                gap: var(--space-lg);
+            }
+
+            .vehicle-price {
+                font-size: 28px;
             }
 
             .admin-grid {
                 grid-template-columns: 1fr;
             }
 
-            .filter-grid {
-                grid-template-columns: 1fr;
+            .filter-pills {
+                flex-direction: column;
+            }
+
+            .pill {
+                width: 100%;
+                text-align: center;
             }
 
             .whatsapp-float {
-                bottom: 20px;
-                right: 20px;
-                width: 50px;
-                height: 50px;
+                bottom: var(--space-lg);
+                right: var(--space-lg);
+                width: 56px;
+                height: 56px;
             }
 
             .whatsapp-float svg {
-                width: 28px;
-                height: 28px;
-            }
-
-            /* Mobile Navigation */
-            .header-top {
-                padding: 8px 0;
-            }
-
-            .header-top .container {
-                flex-direction: column;
-                gap: 8px;
-            }
-
-            .contact-info {
-                flex-direction: column;
-                gap: 5px;
-                width: 100%;
-            }
-
-            .contact-item {
-                font-size: 0.75rem;
-            }
-
-            .header-main {
-                padding: 12px 0;
-            }
-
-            .logo {
-                font-size: 1.8rem !important;
-            }
-
-            .logo-image {
-                height: 40px;
-            }
-
-            .nav-links {
-                gap: 12px;
-                flex-wrap: wrap;
-            }
-
-            .nav-link {
-                font-size: 0.85rem;
-                padding: 4px 0;
+                width: 24px;
+                height: 24px;
             }
 
             .header-content {
-                gap: 12px;
+                gap: var(--space-md);
+            }
+
+            .nav-links {
+                gap: var(--space-lg);
+            }
+
+            .logo {
+                font-size: 20px;
             }
         }
 
         @media (max-width: 480px) {
-            .logo {
-                font-size: 1.5rem !important;
-                letter-spacing: 1px !important;
+            .hero h1 {
+                font-size: 32px;
             }
 
-            .logo-image {
-                height: 35px;
+            .hero-description {
+                font-size: 15px;
+            }
+
+            .section-title {
+                font-size: 28px;
+            }
+
+            .vehicle-price {
+                font-size: 24px;
+            }
+
+            .logo {
+                font-size: 18px;
             }
 
             .nav-links {
-                gap: 8px;
+                gap: var(--space-sm);
             }
 
             .nav-link {
-                font-size: 0.75rem;
+                font-size: 11px;
             }
 
-            .contact-item {
-                font-size: 0.7rem;
+            .btn-primary,
+            .btn-secondary {
+                padding: 12px 20px;
+                font-size: 12px;
             }
 
-            .hero h1 {
-                font-size: 2rem;
+            .vehicle-content {
+                padding: var(--space-md);
             }
 
-            .hero p {
-                font-size: 1rem;
+            .search-bar input {
+                max-width: 100%;
             }
 
-            .rating {
-                font-size: 0.85rem;
-                padding: 10px 20px;
+            .filter-pills {
+                gap: 8px;
+            }
+
+            .pill {
+                padding: 8px 16px;
+                font-size: 11px;
             }
         }
     </style>
@@ -1159,10 +1614,8 @@
             appId: "1:5862123065:web:2e2e3caa68511b1a5ecfe8"
         };
 
-        // Check if Firebase is configured
         const isFirebaseConfigured = firebaseConfig.apiKey !== "YOUR_API_KEY_HERE";
 
-        // Initialize Firebase
         let database, storage;
         if (isFirebaseConfigured) {
             firebase.initializeApp(firebaseConfig);
@@ -1170,7 +1623,6 @@
             storage = firebase.storage();
         }
 
-        // Sample initial data (only used if Firebase not configured)
         const initialInventory = [
             {
                 id: 1,
@@ -1192,16 +1644,22 @@
             const [isAdmin, setIsAdmin] = useState(false);
             const [inventory, setInventory] = useState([]);
             const [loading, setLoading] = useState(true);
+            const [searchTerm, setSearchTerm] = useState('');
+            const [selectedCar, setSelectedCar] = useState(null);
+            const [showAdvancedFilters, setShowAdvancedFilters] = useState(false);
+            
+            // Advanced filter state
             const [filters, setFilters] = useState({
-                search: '',
                 minPrice: '',
                 maxPrice: '',
+                make: '',
+                model: '',
+                minYear: '',
+                maxYear: '',
                 transmission: '',
                 fuelType: ''
             });
-            const [selectedCar, setSelectedCar] = useState(null);
 
-            // Load inventory from Firebase
             useEffect(() => {
                 if (!isFirebaseConfigured) {
                     setInventory(initialInventory);
@@ -1210,8 +1668,15 @@
                 }
 
                 const inventoryRef = database.ref('inventory');
+
+                // Fallback timeout so site never gets stuck loading
+                const loadingTimeout = setTimeout(() => {
+                    setInventory(initialInventory);
+                    setLoading(false);
+                }, 5000);
                 
                 inventoryRef.on('value', (snapshot) => {
+                    clearTimeout(loadingTimeout);
                     const data = snapshot.val();
                     if (data) {
                         const inventoryArray = Object.keys(data).map(key => ({
@@ -1220,27 +1685,76 @@
                         }));
                         setInventory(inventoryArray);
                     } else {
-                        setInventory([]);
+                        setInventory(initialInventory);
                     }
+                    setLoading(false);
+                }, (error) => {
+                    console.error('Firebase loading error:', error);
+                    clearTimeout(loadingTimeout);
+                    setInventory(initialInventory);
                     setLoading(false);
                 });
 
-                return () => inventoryRef.off();
+                return () => {
+                    clearTimeout(loadingTimeout);
+                    inventoryRef.off();
+                };
+            }, []);
+
+            // Secret admin access via URL hash
+            useEffect(() => {
+                const checkHash = () => {
+                    if (window.location.hash === '#admin-login') {
+                        setCurrentView('admin-login');
+                    }
+                };
+                
+                checkHash();
+                window.addEventListener('hashchange', checkHash);
+                
+                return () => window.removeEventListener('hashchange', checkHash);
             }, []);
 
             const filteredInventory = inventory.filter(car => {
                 if (car.quantity === 0) return false;
                 
-                const matchesSearch = !filters.search || 
-                    `${car.make} ${car.model}`.toLowerCase().includes(filters.search.toLowerCase());
+                // Search term filter
+                const matchesSearch = !searchTerm || 
+                    `${car.make} ${car.model}`.toLowerCase().includes(searchTerm.toLowerCase());
                 
+                // Price filters
                 const matchesMinPrice = !filters.minPrice || car.price >= parseInt(filters.minPrice);
                 const matchesMaxPrice = !filters.maxPrice || car.price <= parseInt(filters.maxPrice);
+                
+                // Make/Model filters
+                const matchesMake = !filters.make || car.make.toLowerCase() === filters.make.toLowerCase();
+                const matchesModel = !filters.model || car.model.toLowerCase().includes(filters.model.toLowerCase());
+                
+                // Year filters
+                const matchesMinYear = !filters.minYear || car.year >= parseInt(filters.minYear);
+                const matchesMaxYear = !filters.maxYear || car.year <= parseInt(filters.maxYear);
+                
+                // Transmission/Fuel filters
                 const matchesTransmission = !filters.transmission || car.transmission === filters.transmission;
                 const matchesFuelType = !filters.fuelType || car.fuelType === filters.fuelType;
-
-                return matchesSearch && matchesMinPrice && matchesMaxPrice && matchesTransmission && matchesFuelType;
+                
+                return matchesSearch && matchesMinPrice && matchesMaxPrice && matchesMake && 
+                       matchesModel && matchesMinYear && matchesMaxYear && matchesTransmission && matchesFuelType;
             });
+
+            const clearFilters = () => {
+                setFilters({
+                    minPrice: '',
+                    maxPrice: '',
+                    make: '',
+                    model: '',
+                    minYear: '',
+                    maxYear: '',
+                    transmission: '',
+                    fuelType: ''
+                });
+                setSearchTerm('');
+            };
 
             if (!isFirebaseConfigured) {
                 return <ConfigWarning />;
@@ -1274,7 +1788,17 @@
                     <Header onAdminClick={() => setCurrentView('admin-login')} />
                     <Hero />
                     <div className="container">
-                        <Filters filters={filters} setFilters={setFilters} />
+                        <InventoryControls 
+                            searchTerm={searchTerm} 
+                            setSearchTerm={setSearchTerm}
+                            filters={filters}
+                            setFilters={setFilters}
+                            showAdvancedFilters={showAdvancedFilters}
+                            setShowAdvancedFilters={setShowAdvancedFilters}
+                            clearFilters={clearFilters}
+                            resultCount={filteredInventory.length}
+                            inventory={inventory}
+                        />
                     </div>
                     <InventorySection cars={filteredInventory} onCarClick={setSelectedCar} />
                     <Footer />
@@ -1282,50 +1806,30 @@
                     {selectedCar && (
                         <CarModal car={selectedCar} onClose={() => setSelectedCar(null)} />
                     )}
+                    )}
                 </>
             );
         }
 
         function ConfigWarning() {
             return (
-                <div style={{
-                    minHeight: '100vh',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    padding: '20px'
-                }}>
-                    <div style={{
-                        background: 'var(--bg-card)',
-                        padding: '40px',
-                        borderRadius: '12px',
-                        maxWidth: '600px',
-                        border: '2px solid var(--danger)'
-                    }}>
-                        <h2 style={{color: 'var(--danger)', marginBottom: '20px', fontFamily: 'Bebas Neue', fontSize: '2rem'}}>
-                            ⚠️ FIREBASE NOT CONFIGURED
-                        </h2>
-                        <p style={{marginBottom: '15px', lineHeight: '1.8'}}>
+                <div className="config-warning">
+                    <div className="config-warning-box">
+                        <h2>⚠️ FIREBASE NOT CONFIGURED</h2>
+                        <p>
                             This website requires Firebase to store inventory data across all devices.
                         </p>
-                        <p style={{marginBottom: '15px', lineHeight: '1.8'}}>
+                        <p>
                             Please follow the <strong>FIREBASE-SETUP-GUIDE.md</strong> to:
                         </p>
-                        <ol style={{marginLeft: '20px', lineHeight: '2'}}>
+                        <ol>
                             <li>Create a free Firebase account</li>
                             <li>Set up a new Firebase project</li>
                             <li>Get your configuration values</li>
                             <li>Replace the config in this HTML file</li>
                         </ol>
-                        <div style={{
-                            marginTop: '20px',
-                            padding: '15px',
-                            background: 'var(--bg-dark)',
-                            borderRadius: '8px',
-                            fontSize: '0.9rem',
-                            color: 'var(--text-secondary)'
-                        }}>
-                            Look for <code style={{color: 'var(--primary)'}}>firebaseConfig</code> in the HTML file and update it with your values.
+                        <div className="config-code">
+                            Look for <code>firebaseConfig</code> in the HTML file and update it with your values.
                         </div>
                     </div>
                 </div>
@@ -1335,55 +1839,35 @@
         function Header({ onAdminClick }) {
             return (
                 <header>
-                    <div className="header-top">
-                        <div className="container">
-                            <div className="contact-info">
-                                <div className="contact-item">
-                                    <span>📞</span>
-                                    <span>064 643 0253</span>
-                                </div>
-                                <div className="contact-item">
-                                    <span>📍</span>
-                                    <span>407 Eton Ave, Ferndale, Randburg</span>
-                                </div>
-                                <div className="contact-item">
-                                    <span>⏰</span>
-                                    <span>Mon-Fri: 8am-5pm | Sat: 8am-3pm</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="header-main">
-                        <div className="container">
-                            <div className="header-content">
-                                <div className="logo">
-                                    <img src="m.shalom.png" alt="M Shalom Trading" className="logo-image" 
-                                         onError={(e) => {
-                                             e.target.style.display = 'none';
-                                             e.target.nextElementSibling.style.display = 'block';
-                                         }}
-                                    />
-                                    <div style={{display: 'none', fontFamily: 'Bebas Neue', fontSize: '2.5rem', letterSpacing: '3px'}}>
-                                        M SHALOM <span style={{color: 'var(--text-primary)'}}>TRADING</span>
-                                    </div>
-                                </div>
-                                <nav>
-                                    <ul className="nav-links">
-                                        <li><a href="#" className="nav-link">Home</a></li>
-                                        <li><a href="#inventory" className="nav-link">Inventory</a></li>
-                                        <li><a href="#contact" className="nav-link">Contact</a></li>
-                                        <li>
-                                            <a href="#" onClick={(e) => { e.preventDefault(); onAdminClick(); }} 
-                                               className="nav-link" 
-                                               style={{color: 'var(--text-secondary)', fontSize: '0.8rem'}}
-                                               title="Admin Login">
-                                                Admin
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </nav>
-                            </div>
-                        </div>
+                    <div className="header-content">
+                        <a href="#" className="logo"><img src="m.shalom.png" alt="M Shalom Trading Logo" className="logo-image" /></a>
+                        <nav>
+                            <ul className="nav-links">
+                                <li><a href="#" className="nav-link">Home</a></li>
+                                <li><a href="#inventory" className="nav-link">Inventory</a></li>
+                                <li><a href="#contact" className="nav-link">Contact</a></li>
+                            </ul>
+                        </nav>
+                        {/* Discreet user icon - replaces phone number */}
+                        <button 
+                            onClick={onAdminClick}
+                            className="header-cta"
+                            style={{
+                                background: 'transparent',
+                                border: '1px solid var(--border-light)',
+                                padding: '10px 14px',
+                                cursor: 'pointer',
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: '0'
+                            }}
+                            title="Admin Access"
+                        >
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
+                        </button>
                     </div>
                 </header>
             );
@@ -1392,15 +1876,33 @@
         function Hero() {
             return (
                 <section className="hero">
+                    {/* Video Background */}
+                    <video 
+                        className="hero-video-bg" 
+                        autoPlay 
+                        loop 
+                        muted 
+                        playsInline
+                    >
+                        <source src="./herocar.mp4" type="video/mp4" />
+                    </video>
+                    <div className="watermark-cover"></div>
+                    <div className="hero-video-overlay"></div>
+                    
                     <div className="container">
                         <div className="hero-content animate-in">
-                            <h1>PREMIUM USED VEHICLES</h1>
-                            <p>Discover quality pre-owned cars in Randburg. Trusted by thousands of satisfied customers.</p>
-                            <div className="rating">
-                                <span className="stars">⭐⭐⭐⭐⭐</span>
-                                <span>4.8 Stars</span>
-                                <span style={{color: 'var(--text-secondary)'}}>|</span>
-                                <span>3,412 Google Reviews</span>
+                            <div className="hero-eyebrow">Randburg's Premier Dealership</div>
+                            <h1>Quality vehicles.<br/>Trusted service.</h1>
+                            <p className="hero-description">
+                                Hand-selected inventory. Transparent pricing. Professional service since 2010.
+                            </p>
+                            <div className="hero-cta">
+                                <a href="#inventory" className="btn-primary">
+                                    View Inventory →
+                                </a>
+                                <a href="tel:0646430253" className="btn-secondary">
+                                    064 643 0253
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -1408,67 +1910,150 @@
             );
         }
 
-        function Filters({ filters, setFilters }) {
+        function InventoryControls({ searchTerm, setSearchTerm, filters, setFilters, showAdvancedFilters, setShowAdvancedFilters, clearFilters, resultCount, inventory }) {
+            // Get unique values for dropdowns
+            const uniqueMakes = [...new Set(inventory.map(car => car.make))].sort();
+            const uniqueYears = [...new Set(inventory.map(car => car.year))].sort((a, b) => b - a);
+            
             return (
-                <div className="filters">
-                    <div className="filter-grid">
-                        <div className="filter-group">
-                            <label>Search Make/Model</label>
-                            <input 
-                                type="text" 
-                                className="filter-input"
-                                placeholder="e.g., BMW, Toyota..."
-                                value={filters.search}
-                                onChange={(e) => setFilters({...filters, search: e.target.value})}
-                            />
-                        </div>
-                        <div className="filter-group">
-                            <label>Min Price (R)</label>
-                            <input 
-                                type="number" 
-                                className="filter-input"
-                                placeholder="0"
-                                value={filters.minPrice}
-                                onChange={(e) => setFilters({...filters, minPrice: e.target.value})}
-                            />
-                        </div>
-                        <div className="filter-group">
-                            <label>Max Price (R)</label>
-                            <input 
-                                type="number" 
-                                className="filter-input"
-                                placeholder="1,000,000"
-                                value={filters.maxPrice}
-                                onChange={(e) => setFilters({...filters, maxPrice: e.target.value})}
-                            />
-                        </div>
-                        <div className="filter-group">
-                            <label>Transmission</label>
-                            <select 
-                                className="filter-select"
-                                value={filters.transmission}
-                                onChange={(e) => setFilters({...filters, transmission: e.target.value})}
-                            >
-                                <option value="">All</option>
-                                <option value="Automatic">Automatic</option>
-                                <option value="Manual">Manual</option>
-                            </select>
-                        </div>
-                        <div className="filter-group">
-                            <label>Fuel Type</label>
-                            <select 
-                                className="filter-select"
-                                value={filters.fuelType}
-                                onChange={(e) => setFilters({...filters, fuelType: e.target.value})}
-                            >
-                                <option value="">All</option>
-                                <option value="Petrol">Petrol</option>
-                                <option value="Diesel">Diesel</option>
-                                <option value="Hybrid">Hybrid</option>
-                                <option value="Electric">Electric</option>
-                            </select>
-                        </div>
+                <div className="inventory-controls">
+                    <div className="search-bar">
+                        <input 
+                            type="text" 
+                            placeholder="Search by make or model..."
+                            value={searchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)}
+                        />
                     </div>
+
+                    <button 
+                        className={`filter-toggle ${showAdvancedFilters ? 'active' : ''}`}
+                        onClick={() => setShowAdvancedFilters(!showAdvancedFilters)}
+                    >
+                        {showAdvancedFilters ? '▲' : '▼'} Advanced Filters
+                    </button>
+
+                    {showAdvancedFilters && (
+                        <div className="advanced-filters">
+                            {/* Price Range */}
+                            <div className="filter-group">
+                                <label className="filter-label">Price Range</label>
+                                <div className="price-range-inputs">
+                                    <input 
+                                        type="number" 
+                                        className="filter-input"
+                                        placeholder="Min"
+                                        value={filters.minPrice}
+                                        onChange={(e) => setFilters({...filters, minPrice: e.target.value})}
+                                    />
+                                    <span className="price-separator">—</span>
+                                    <input 
+                                        type="number" 
+                                        className="filter-input"
+                                        placeholder="Max"
+                                        value={filters.maxPrice}
+                                        onChange={(e) => setFilters({...filters, maxPrice: e.target.value})}
+                                    />
+                                </div>
+                            </div>
+
+                            {/* Make */}
+                            <div className="filter-group">
+                                <label className="filter-label">Make</label>
+                                <select 
+                                    className="filter-select"
+                                    value={filters.make}
+                                    onChange={(e) => setFilters({...filters, make: e.target.value})}
+                                >
+                                    <option value="">All Makes</option>
+                                    {uniqueMakes.map(make => (
+                                        <option key={make} value={make}>{make}</option>
+                                    ))}
+                                </select>
+                            </div>
+
+                            {/* Model */}
+                            <div className="filter-group">
+                                <label className="filter-label">Model</label>
+                                <input 
+                                    type="text" 
+                                    className="filter-input"
+                                    placeholder="Any model"
+                                    value={filters.model}
+                                    onChange={(e) => setFilters({...filters, model: e.target.value})}
+                                />
+                            </div>
+
+                            {/* Year Range */}
+                            <div className="filter-group">
+                                <label className="filter-label">Year Range</label>
+                                <div className="price-range-inputs">
+                                    <select 
+                                        className="filter-select"
+                                        value={filters.minYear}
+                                        onChange={(e) => setFilters({...filters, minYear: e.target.value})}
+                                    >
+                                        <option value="">From</option>
+                                        {uniqueYears.map(year => (
+                                            <option key={year} value={year}>{year}</option>
+                                        ))}
+                                    </select>
+                                    <span className="price-separator">—</span>
+                                    <select 
+                                        className="filter-select"
+                                        value={filters.maxYear}
+                                        onChange={(e) => setFilters({...filters, maxYear: e.target.value})}
+                                    >
+                                        <option value="">To</option>
+                                        {uniqueYears.map(year => (
+                                            <option key={year} value={year}>{year}</option>
+                                        ))}
+                                    </select>
+                                </div>
+                            </div>
+
+                            {/* Transmission */}
+                            <div className="filter-group">
+                                <label className="filter-label">Transmission</label>
+                                <select 
+                                    className="filter-select"
+                                    value={filters.transmission}
+                                    onChange={(e) => setFilters({...filters, transmission: e.target.value})}
+                                >
+                                    <option value="">All</option>
+                                    <option value="Automatic">Automatic</option>
+                                    <option value="Manual">Manual</option>
+                                </select>
+                            </div>
+
+                            {/* Fuel Type */}
+                            <div className="filter-group">
+                                <label className="filter-label">Fuel Type</label>
+                                <select 
+                                    className="filter-select"
+                                    value={filters.fuelType}
+                                    onChange={(e) => setFilters({...filters, fuelType: e.target.value})}
+                                >
+                                    <option value="">All</option>
+                                    <option value="Petrol">Petrol</option>
+                                    <option value="Diesel">Diesel</option>
+                                    <option value="Hybrid">Hybrid</option>
+                                    <option value="Electric">Electric</option>
+                                </select>
+                            </div>
+                        </div>
+                    )}
+
+                    {(showAdvancedFilters || searchTerm) && (
+                        <div className="filter-actions">
+                            <button className="btn-filter btn-filter-clear" onClick={clearFilters}>
+                                Clear All Filters
+                            </button>
+                            <div className="results-count">
+                                Showing <strong>{resultCount}</strong> {resultCount === 1 ? 'vehicle' : 'vehicles'}
+                            </div>
+                        </div>
+                    )}
                 </div>
             );
         }
@@ -1477,14 +2062,16 @@
             return (
                 <section className="inventory-section" id="inventory">
                     <div className="container">
-                        <h2 className="section-title">AVAILABLE INVENTORY</h2>
+                        <div className="section-header">
+                            <h2 className="section-title">Available Inventory</h2>
+                        </div>
                         {cars.length === 0 ? (
-                            <p style={{textAlign: 'center', color: 'var(--text-secondary)', fontSize: '1.2rem'}}>
-                                No vehicles match your criteria. Try adjusting your filters.
+                            <p style={{textAlign: 'center', color: 'var(--text-secondary)', fontSize: '16px'}}>
+                                No vehicles match your search. Try adjusting your criteria.
                             </p>
                         ) : (
-                            <div className="car-grid">
-                                {cars.map(car => <CarCard key={car.id} car={car} onCarClick={onCarClick} />)}
+                            <div className="vehicle-grid">
+                                {cars.map(car => <VehicleCard key={car.id} car={car} onCarClick={onCarClick} />)}
                             </div>
                         )}
                     </div>
@@ -1492,7 +2079,7 @@
             );
         }
 
-        function CarCard({ car, onCarClick }) {
+        function VehicleCard({ car, onCarClick }) {
             const openWhatsApp = (e) => {
                 e.stopPropagation();
                 const phone = "27646430253";
@@ -1503,42 +2090,26 @@
             };
 
             return (
-                <div className="car-card animate-in" onClick={() => onCarClick(car)}>
-                    <img src={car.images && car.images[0] ? car.images[0] : ''} alt={`${car.make} ${car.model}`} className="car-image" />
-                    <div className="car-content">
-                        <div className="car-header">
-                            <h3 className="car-title">{car.year} {car.make} {car.model}</h3>
-                            <div className="car-price">R {car.price.toLocaleString()}</div>
+                <div className="vehicle-card animate-in" onClick={() => onCarClick(car)}>
+                    <img src={car.images && car.images[0] ? car.images[0] : ''} alt={`${car.make} ${car.model}`} className="vehicle-image" />
+                    <div className="vehicle-content">
+                        <div className="vehicle-header">
+                            <h3 className="vehicle-title">{car.year} {car.make} {car.model}</h3>
+                            <div className="vehicle-price">R {car.price.toLocaleString()}</div>
                         </div>
-                        <div className="car-specs">
-                            <div className="spec-item">
-                                <span>🛣️</span>
-                                <span>{car.mileage.toLocaleString()} km</span>
-                            </div>
-                            <div className="spec-item">
-                                <span>⚙️</span>
-                                <span>{car.transmission}</span>
-                            </div>
-                            <div className="spec-item">
-                                <span>⛽</span>
-                                <span>{car.fuelType}</span>
-                            </div>
-                            <div className="spec-item">
-                                <span className={`stock-badge ${car.quantity > 0 ? 'in-stock' : 'out-of-stock'}`}>
-                                    {car.quantity > 0 ? `${car.quantity} In Stock` : 'Out of Stock'}
-                                </span>
-                            </div>
+                        <div className="vehicle-meta">
+                            {car.mileage.toLocaleString()} km · {car.transmission} · {car.fuelType}
                         </div>
-                        <p style={{color: 'var(--text-secondary)', marginBottom: '15px', fontSize: '0.9rem'}}>
+                        <p className="vehicle-description">
                             {car.description}
                         </p>
                         {car.images && car.images.length > 1 && (
-                            <p style={{color: 'var(--primary)', marginBottom: '10px', fontSize: '0.85rem', textAlign: 'center'}}>
-                                📸 {car.images.length} photos available - Click to view
+                            <p className="vehicle-image-count">
+                                📸 {car.images.length} photos available
                             </p>
                         )}
-                        <button className="btn btn-primary" onClick={openWhatsApp}>
-                            💬 WhatsApp Us
+                        <button className="btn-vehicle-cta" onClick={openWhatsApp}>
+                            💬 Schedule Viewing
                         </button>
                     </div>
                 </div>
@@ -1644,7 +2215,7 @@
                                 </>
                             )}
 
-                            <div className="car-details-grid">
+                            <div className="vehicle-details-grid">
                                 <div className="detail-item">
                                     <span className="detail-label">Price</span>
                                     <span className="detail-value" style={{color: 'var(--primary)'}}>
@@ -1677,7 +2248,7 @@
 
                             {car.description && (
                                 <p style={{
-                                    marginTop: '15px', 
+                                    marginTop: '24px', 
                                     color: 'var(--text-secondary)', 
                                     lineHeight: '1.6'
                                 }}>
@@ -1687,7 +2258,7 @@
 
                             <button 
                                 className="btn btn-primary" 
-                                style={{marginTop: '20px'}}
+                                style={{marginTop: '32px', width: '100%'}}
                                 onClick={openWhatsApp}
                             >
                                 💬 Inquire via WhatsApp
@@ -1828,7 +2399,6 @@
                     }
 
                     try {
-                        // Upload to Firebase Storage
                         const timestamp = Date.now();
                         const fileName = `${timestamp}_${file.name}`;
                         const storageRef = storage.ref(`vehicles/${fileName}`);
@@ -1867,7 +2437,6 @@
 
             const removeImage = async (index, imageUrl) => {
                 try {
-                    // Delete from Firebase Storage
                     if (imageUrl.includes('firebasestorage')) {
                         const imageRef = storage.refFromURL(imageUrl);
                         await imageRef.delete();
@@ -1901,15 +2470,12 @@
 
                 try {
                     if (editingId) {
-                        // Update existing
                         await database.ref(`inventory/${editingId}`).update(carData);
                         setEditingId(null);
                     } else {
-                        // Add new
                         await database.ref('inventory').push(carData);
                     }
 
-                    // Reset form
                     setFormData({
                         make: '',
                         model: '',
@@ -1950,7 +2516,6 @@
                 if (!confirm('Are you sure you want to delete this vehicle?')) return;
                 
                 try {
-                    // Delete images from storage
                     if (images && images.length > 0) {
                         for (const imageUrl of images) {
                             if (imageUrl.includes('firebasestorage')) {
@@ -1960,7 +2525,6 @@
                         }
                     }
                     
-                    // Delete from database
                     await database.ref(`inventory/${id}`).remove();
                     alert('Vehicle deleted successfully!');
                 } catch (error) {
@@ -1984,7 +2548,7 @@
                 <div className="admin-panel">
                     <div className="container">
                         <div className="admin-header">
-                            <h1 className="section-title">ADMIN DASHBOARD</h1>
+                            <h1 className="section-title">Admin Dashboard</h1>
                             <button className="btn btn-logout" onClick={onLogout}>
                                 Logout
                             </button>
@@ -1992,7 +2556,7 @@
 
                         <div className="admin-grid">
                             <div className="admin-form">
-                                <h3 style={{marginBottom: '20px', fontSize: '1.5rem'}}>
+                                <h3 style={{marginBottom: '32px', fontSize: 'var(--text-h3)'}}>
                                     {editingId ? 'Edit Vehicle' : 'Add New Vehicle'}
                                 </h3>
                                 <form onSubmit={handleSubmit}>
@@ -2091,10 +2655,10 @@
                                             onDrop={handleDrop}
                                         >
                                             <div className="upload-icon">📸</div>
-                                            <p style={{color: 'var(--text-secondary)', marginBottom: '5px'}}>
+                                            <p style={{color: 'var(--text-secondary)', marginBottom: '8px'}}>
                                                 {uploading ? 'Uploading...' : 'Click to upload or drag & drop'}
                                             </p>
-                                            <p style={{color: 'var(--text-secondary)', fontSize: '0.85rem'}}>
+                                            <p style={{color: 'var(--text-secondary)', fontSize: '13px'}}>
                                                 JPG, PNG, GIF (max 5MB each)
                                             </p>
                                             <input 
@@ -2158,7 +2722,7 @@
                                         <button 
                                             type="button" 
                                             className="btn btn-danger" 
-                                            style={{marginTop: '10px'}}
+                                            style={{marginTop: '8px'}}
                                             onClick={() => {
                                                 setEditingId(null);
                                                 setFormData({
@@ -2199,7 +2763,7 @@
                                                         <strong>{car.year} {car.make} {car.model}</strong>
                                                         <br/>
                                                         <small style={{color: 'var(--text-secondary)'}}>
-                                                            {car.mileage.toLocaleString()}km • {car.transmission} • {car.fuelType}
+                                                            {car.mileage.toLocaleString()}km · {car.transmission} · {car.fuelType}
                                                         </small>
                                                         <br/>
                                                         <small style={{color: 'var(--primary)'}}>
@@ -2259,31 +2823,43 @@
                     <div className="container">
                         <div className="footer-content">
                             <div className="footer-section">
-                                <h3>M SHALOM TRADING</h3>
+                                <h3>M Shalom Trading</h3>
                                 <p>Your trusted partner for quality used vehicles in Randburg.</p>
-                                <p>Serving customers since 2010 with integrity and excellence.</p>
+                                <p>Serving customers with integrity and excellence since 2010.</p>
                             </div>
                             <div className="footer-section">
-                                <h3>CONTACT INFO</h3>
-                                <p>📞 064 643 0253</p>
-                                <p>📍 407 Eton Ave, Ferndale</p>
-                                <p>Randburg, 2194</p>
+                                <h3>Contact</h3>
+                                <p style={{display: 'flex', alignItems: 'center', gap: '8px'}}>
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                                    </svg>
+                                    064 643 0253
+                                </p>
+                                <p style={{display: 'flex', alignItems: 'center', gap: '8px'}}>
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                        <circle cx="12" cy="10" r="3"></circle>
+                                    </svg>
+                                    407 Eton Ave, Ferndale
+                                </p>
+                                <p style={{paddingLeft: '24px'}}>Randburg, 2194</p>
                             </div>
                             <div className="footer-section">
-                                <h3>OPENING HOURS</h3>
-                                <p>Monday - Friday: 8am - 5pm</p>
-                                <p>Saturday: 8am - 3pm</p>
-                                <p>Sunday: Closed</p>
-                            </div>
-                            <div className="footer-section">
-                                <h3>FOLLOW US</h3>
+                                <h3>Follow Us</h3>
                                 <a href="https://www.tiktok.com/@m.shalom.trading" target="_blank">TikTok</a>
                                 <a href="https://www.facebook.com/people/M-shalom-Trading/" target="_blank">Facebook</a>
                                 <a href="https://www.instagram.com/mshalom_trading/" target="_blank">Instagram</a>
                             </div>
+
+                            <div className="footer-section">
+                                <h3>Hours</h3>
+                                <p>Monday - Friday: 8am - 5pm</p>
+                                <p>Saturday: 8am - 3pm</p>
+                                <p>Sunday: Closed</p>
+                            </div>
                         </div>
                         <div className="footer-bottom">
-                            <p>&copy; 2024 M Shalom Trading. All rights reserved. | Powered by Firebase</p>
+                            <p>&copy; 2024 M Shalom Trading. All rights reserved.</p>
                         </div>
                     </div>
                 </footer>
